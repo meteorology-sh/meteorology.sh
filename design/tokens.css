@@ -1,0 +1,239 @@
+/* Petrichor design tokens — generated from design/tokens.json. Do not edit by hand.
+   Source of truth: the Petrichor Brand System artifact.
+   Operations (dark) is the primary theme and the un-stamped default. */
+
+:root {
+  color-scheme: dark;
+  --ground: #000000;
+  --surface: #0c0f0e;
+  --surface-raised: #171b19;
+  --surface-sunken: #050706;
+  --hairline: #252927;
+  --border: #626764;
+  --border-strong: #8f9c97;
+  --ink: #ecf9ff;
+  --ink-muted: #8f9c97;
+  --ink-faint: #6d7a75;
+  --ink-inverse: #000000;
+  --verdigris: #365b4e;
+  --verdigris-deep: #1b382e;
+  --verdigris-bright: #74c9a0;
+  --on-verdigris: #ecf9ff;
+  --hygro: #74c9a0;
+  --glacio: #00bafe;
+  --caution: #f0b354;
+  --scrub: #a83a24;
+  --on-scrub: #ecf9ff;
+  --caliche: #c8b78f;
+  --focus: #74c9a0;
+  --shadow-lift: 0 8px 24px rgba(0,0,0,0.72);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+  --space-10: 64px;
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  --font-display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+/* Paper — printed research, press kit. Opt in with data-theme, or follow the OS. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --ground: #f4f2ed;
+    --surface: #ffffff;
+    --surface-raised: #eae7e0;
+    --surface-sunken: #e4e0d8;
+    --hairline: #d5d0c6;
+    --border: #8f8a7c;
+    --border-strong: #666c67;
+    --ink: #10130f;
+    --ink-muted: #4a504b;
+    --ink-faint: #666c67;
+    --ink-inverse: #f4f2ed;
+    --verdigris: #2c4c41;
+    --verdigris-deep: #1b382e;
+    --verdigris-bright: #1a6044;
+    --on-verdigris: #ffffff;
+    --hygro: #1a6044;
+    --glacio: #00618f;
+    --caution: #7d5206;
+    --scrub: #9c3520;
+    --on-scrub: #ffffff;
+    --caliche: #7d6e44;
+    --focus: #1a6044;
+    --shadow-lift: 0 8px 24px rgba(16,19,15,0.14);
+  }
+}
+
+[data-theme="light"], [data-theme="paper"] {
+  color-scheme: light;
+  --ground: #f4f2ed;
+  --surface: #ffffff;
+  --surface-raised: #eae7e0;
+  --surface-sunken: #e4e0d8;
+  --hairline: #d5d0c6;
+  --border: #8f8a7c;
+  --border-strong: #666c67;
+  --ink: #10130f;
+  --ink-muted: #4a504b;
+  --ink-faint: #666c67;
+  --ink-inverse: #f4f2ed;
+  --verdigris: #2c4c41;
+  --verdigris-deep: #1b382e;
+  --verdigris-bright: #1a6044;
+  --on-verdigris: #ffffff;
+  --hygro: #1a6044;
+  --glacio: #00618f;
+  --caution: #7d5206;
+  --scrub: #9c3520;
+  --on-scrub: #ffffff;
+  --caliche: #7d6e44;
+  --focus: #1a6044;
+  --shadow-lift: 0 8px 24px rgba(16,19,15,0.14);
+}
+
+[data-theme="dark"], [data-theme="operations"] {
+  color-scheme: dark;
+  --ground: #000000;
+  --surface: #0c0f0e;
+  --surface-raised: #171b19;
+  --surface-sunken: #050706;
+  --hairline: #252927;
+  --border: #626764;
+  --border-strong: #8f9c97;
+  --ink: #ecf9ff;
+  --ink-muted: #8f9c97;
+  --ink-faint: #6d7a75;
+  --ink-inverse: #000000;
+  --verdigris: #365b4e;
+  --verdigris-deep: #1b382e;
+  --verdigris-bright: #74c9a0;
+  --on-verdigris: #ecf9ff;
+  --hygro: #74c9a0;
+  --glacio: #00bafe;
+  --caution: #f0b354;
+  --scrub: #a83a24;
+  --on-scrub: #ecf9ff;
+  --caliche: #c8b78f;
+  --focus: #74c9a0;
+  --shadow-lift: 0 8px 24px rgba(0,0,0,0.72);
+}
+
+/* Type scale */
+/* Display */
+.display-xl {
+  font-family: var(--font-display);
+  font-size: 76px;
+  line-height: 72px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.display-l {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 46px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.display-m {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Text */
+.heading {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
+.subheading {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+}
+.body-sm {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 400;
+}
+.label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Data */
+.data-l {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.data {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.coord {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Research */
+.research-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 600;
+}
+.research-body {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 28px;
+  font-weight: 400;
+}
+.research-note {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  font-style: italic;
+}
+

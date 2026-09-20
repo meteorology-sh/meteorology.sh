@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Weatherman">
+  <title>Weatherman</title>
+  <path d="M6 20 A4.6 4.6 0 0 1 9.6 12.4 A6.8 6.8 0 0 1 21.8 11.8 A5 5 0 0 1 26 20 Z"
+        fill="none" stroke="#ecf9ff" stroke-width="1.6" stroke-linejoin="round"/>
+</svg>

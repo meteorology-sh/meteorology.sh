@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Petrichor seal">
+  <title>Petrichor seal</title>
+  <circle cx="32" cy="32" r="29.25" fill="none" stroke="#666c67" stroke-width="1.5"/>
+  <g stroke="#666c67" stroke-width="1.5" stroke-linecap="square">
+    <path d="M32 0.5 V6"/><path d="M32 58 V63.5"/><path d="M0.5 32 H6"/><path d="M58 32 H63.5"/>
+  </g>
+  <g fill="#666c67">
+    <rect x="18" y="18" width="20" height="1.6"/>
+    <rect x="18" y="23.4" width="25" height="1.6"/>
+    <rect x="18" y="38.6" width="17" height="1.6"/>
+    <rect x="18" y="44" width="22" height="1.6"/>
+  </g>
+  <rect x="18" y="28.5" width="28" height="6" fill="#1a6044"/>
+</svg>
