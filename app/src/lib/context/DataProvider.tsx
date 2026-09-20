@@ -6,26 +6,29 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { dataActions } from "../store/features/data";
 
 // Client
-import { FetchTemperature } from "../client/api";
+import { FetchWeather } from "../client/api";
 
-const TemperatureContext = createContext<number | undefined>(undefined);
+// Types
+import { type ConditionsT } from "../types/data";
+
+const ConditionsContext = createContext<ConditionsT | undefined>(undefined);
 
 export const DataProvider = () => {
-  const temperature: number | undefined = useAppSelector(
-    (state) => state.data.temperature
+  const conditions: ConditionsT | undefined = useAppSelector(
+    (state) => state.data.conditions
   );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetch = async () => {
-      const temperature = await FetchTemperature();
-      dispatch(dataActions.temperature(temperature.current.temperature_2m));
+      const weather = await FetchWeather();
+      dispatch(dataActions.conditions(weather.current));
     };
 
-    if (!temperature) {
+    if (!conditions) {
       fetch();
     }
-  }, [temperature, dispatch]);
+  }, [conditions, dispatch]);
 
-  return <TemperatureContext.Provider value={temperature} />;
+  return <ConditionsContext.Provider value={conditions} />;
 };

@@ -31,7 +31,8 @@
   --radius-selector: 999px;
 
   --font-sans: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 /* Paper. Follows the OS, or opt in with data-theme. */

@@ -20,15 +20,17 @@ const facts = [
 ];
 
 export const About = () => {
-  const string: string | undefined = useAppSelector((state) => state.data.string);
+  const string: string | undefined = useAppSelector(
+    (state) => state.data.string
+  );
 
   return (
     <>
       <section className="flex flex-col gap-6">
         <h1 className="statement">We publish our data so you can check it.</h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
-          Petrichor runs randomised seeding missions over Texas. We measure the rainfall,
-          report the intervals, and publish every result.
+          Petrichor runs randomised seeding missions over Texas. We measure the
+          rainfall, report the intervals, and publish every result.
         </p>
       </section>
 
@@ -64,7 +66,9 @@ export const About = () => {
                 </tr>
                 <tr className="border-hairline">
                   <td className="t-body px-0 text-ink-muted">Research</td>
-                  <td className="t-data px-0 text-right">hello@meteorology.sh</td>
+                  <td className="t-data px-0 text-right">
+                    hello@meteorology.sh
+                  </td>
                 </tr>
                 <tr className="border-hairline">
                   <td className="t-body px-0 text-ink-muted">Build</td>

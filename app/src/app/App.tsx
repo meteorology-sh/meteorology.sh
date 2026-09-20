@@ -6,9 +6,18 @@ import { NavLink } from "react-router";
 import "./App.css";
 
 const Mark = ({ size = 28 }: { size?: number }) => (
-  <svg viewBox="0 0 32 32" width={size} height={size} role="img" aria-label="Petrichor">
+  <svg
+    viewBox="0 0 32 32"
+    width={size}
+    height={size}
+    role="img"
+    aria-label="Petrichor"
+  >
     {/* Placeholder bolt. Iconography is still open. */}
-    <path className="mark" d="M18.5 2 L6.5 18.5 H13.5 L12 30 L25.5 12.5 H18 Z" />
+    <path
+      className="mark"
+      d="M18.5 2 L6.5 18.5 H13.5 L12 30 L25.5 12.5 H18 Z"
+    />
   </svg>
 );
 
@@ -78,16 +87,20 @@ export const App = () => {
 
         <footer className="footer border-t border-hairline px-4 py-8 sm:px-8">
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-            <p className="t-body-sm text-ink-faint">
-              Licensed weather modification. TDLR WM-0000. FAA authorised.
+            <p className="t-body-sm text-ink-faint">Petrichor</p>
+            <p className="t-coord text-ink-faint">
+              AUSTIN, TEXAS · METEOROLOGY.SH
             </p>
-            <p className="t-coord text-ink-faint">AUSTIN, TEXAS · METEOROLOGY.SH</p>
           </div>
         </footer>
       </div>
 
       <div className="drawer-side">
-        <label htmlFor="drawer-id" aria-label="Close menu" className="drawer-overlay"></label>
+        <label
+          htmlFor="drawer-id"
+          aria-label="Close menu"
+          className="drawer-overlay"
+        ></label>
         <div className="min-h-full w-72 bg-base-200 p-6">
           <NavLink to="/" className="flex items-center gap-3">
             <Mark size={24} />

@@ -1,14 +1,17 @@
 // Redux
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+// Types
+import { type ConditionsT } from "@/lib/types/data";
+
 type DataState = {
   string: string | undefined;
-  temperature: number | undefined;
+  conditions: ConditionsT | undefined;
 };
 
 const initialState: DataState = {
   string: "PETRICHOR",
-  temperature: undefined,
+  conditions: undefined,
 };
 
 const dataSlice = createSlice({
@@ -18,8 +21,8 @@ const dataSlice = createSlice({
     string: (state, action: PayloadAction<string>) => {
       return { ...state, string: action.payload };
     },
-    temperature: (state, action: PayloadAction<number>) => {
-      return { ...state, temperature: action.payload };
+    conditions: (state, action: PayloadAction<ConditionsT>) => {
+      return { ...state, conditions: action.payload };
     },
   },
 });

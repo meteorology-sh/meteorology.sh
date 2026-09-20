@@ -3,7 +3,9 @@
 
 /* The mark is an inline SVG, so its ink is bound to a token here.
    Placeholder bolt — iconography is still open. */
-.mark { fill: var(--secondary); }
+.mark {
+  fill: var(--secondary);
+}
 
 /* The wordmark is set live in Archivo 700 at 0.14em. There is no outlined logotype. */
 .wordmark {

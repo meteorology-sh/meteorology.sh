@@ -18,7 +18,8 @@
   --color-ink-muted: #929a9e;
 
   --font-sans: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 @plugin "daisyui/theme" {
