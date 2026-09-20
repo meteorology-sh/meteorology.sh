@@ -1,7 +1,7 @@
 import reducer, { dataActions } from "@/lib/store/features/data";
 
 const initialState = {
-  string: "ROME",
+  string: "PETRICHOR",
   temperature: undefined,
 };
 
@@ -20,7 +20,7 @@ describe("data slice", () => {
   it("sets the temperature value", () => {
     const state = reducer(initialState, dataActions.temperature(72.5));
     expect(state.temperature).toBe(72.5);
-    expect(state.string).toBe("ROME");
+    expect(state.string).toBe("PETRICHOR");
   });
 
   it("does not lose existing state on partial updates", () => {

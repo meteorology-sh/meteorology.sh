@@ -7,7 +7,7 @@ type DataState = {
 };
 
 const initialState: DataState = {
-  string: "ROME",
+  string: "PETRICHOR",
   temperature: undefined,
 };
 
