@@ -1,0 +1,104 @@
+/* Petrichor — GENERATED from design/tokens.json by design/build-tokens.mjs.
+   Do not edit by hand. Maps the five brand colours onto Tailwind and daisyUI. */
+
+@plugin "daisyui";
+
+/* Tailwind utilities: bg-ground, text-ink-muted, border-hairline, font-mono … */
+@theme {
+  --color-ground: #000000;
+  --color-ink: #ecf9ff;
+  --color-primary: #365b4e;
+  --color-accent: #74c9a0;
+  --color-secondary: #c8b78f;
+  --color-surface: #090a0a;
+  --color-surface-raised: #151617;
+  --color-hairline: #212324;
+  --color-border: #5a5f61;
+  --color-ink-faint: #7b8185;
+  --color-ink-muted: #929a9e;
+
+  --font-sans: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@plugin "daisyui/theme" {
+  name: "operations";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-base-100: #000000;
+  --color-base-200: #090a0a;
+  --color-base-300: #151617;
+  --color-base-content: #ecf9ff;
+
+  --color-primary: #365b4e;
+  --color-primary-content: #ecf9ff;
+  --color-secondary: #c8b78f;
+  --color-secondary-content: #000000;
+  --color-accent: #74c9a0;
+  --color-accent-content: #000000;
+  --color-neutral: #151617;
+  --color-neutral-content: #ecf9ff;
+
+  /* The palette has no status colour — status belongs in a word. These four slots
+     are filled from the brand so a stray component cannot render off-brand. */
+  --color-info: #74c9a0;
+  --color-info-content: #000000;
+  --color-success: #74c9a0;
+  --color-success-content: #000000;
+  --color-warning: #c8b78f;
+  --color-warning-content: #000000;
+  --color-error: #c8b78f;
+  --color-error-content: #000000;
+
+  --radius-box: 0;
+  --radius-field: 2px;
+  --radius-selector: 999px;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "paper";
+  default: false;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #f4f2ed;
+  --color-base-200: #ebe9e4;
+  --color-base-300: #dfded9;
+  --color-base-content: #10130f;
+
+  --color-primary: #2c4c41;
+  --color-primary-content: #f4f2ed;
+  --color-secondary: #756739;
+  --color-secondary-content: #f4f2ed;
+  --color-accent: #1a6044;
+  --color-accent-content: #f4f2ed;
+  --color-neutral: #dfded9;
+  --color-neutral-content: #10130f;
+
+  /* The palette has no status colour — status belongs in a word. These four slots
+     are filled from the brand so a stray component cannot render off-brand. */
+  --color-info: #1a6044;
+  --color-info-content: #f4f2ed;
+  --color-success: #1a6044;
+  --color-success-content: #f4f2ed;
+  --color-warning: #756739;
+  --color-warning-content: #f4f2ed;
+  --color-error: #756739;
+  --color-error-content: #f4f2ed;
+
+  --radius-box: 0;
+  --radius-field: 2px;
+  --radius-selector: 999px;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}

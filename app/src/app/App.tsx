@@ -6,21 +6,9 @@ import { NavLink } from "react-router";
 import "./App.css";
 
 const Mark = ({ size = 28 }: { size?: number }) => (
-  <svg
-    viewBox="0 0 32 32"
-    width={size}
-    height={size}
-    role="img"
-    aria-label="Petrichor"
-  >
-    {/* The Band — an atmospheric sounding with the seeding window marked. */}
-    <g className="ptr-mark__rule">
-      <rect x="4" y="4" width="18" height="1.5" />
-      <rect x="4" y="9" width="23" height="1.5" />
-      <rect x="4" y="22" width="15" height="1.5" />
-      <rect x="4" y="27" width="20" height="1.5" />
-    </g>
-    <rect className="ptr-mark__band" x="4" y="13.5" width="24" height="5" />
+  <svg viewBox="0 0 32 32" width={size} height={size} role="img" aria-label="Petrichor">
+    {/* Placeholder bolt. Iconography is still open. */}
+    <path className="mark" d="M18.5 2 L6.5 18.5 H13.5 L12 30 L25.5 12.5 H18 Z" />
   </svg>
 );
 
@@ -34,88 +22,92 @@ export const App = () => {
     <div className="drawer">
       <input id="drawer-id" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-content ptr-shell">
-        <header className="ptr-bar">
-          <NavLink to="/" className="ptr-wordmark">
-            <Mark />
-            <span className="ptr-wordmark__type">Petrichor</span>
-          </NavLink>
+      <div className="drawer-content flex min-h-dvh flex-col">
+        <header className="navbar border-b border-hairline px-4 sm:px-8">
+          <div className="navbar-start">
+            <NavLink to="/" className="flex items-center gap-3">
+              <Mark />
+              <span className="wordmark text-[17px]">Petrichor</span>
+            </NavLink>
+          </div>
 
-          <nav className="ptr-nav">
-            {routes.map((route) => (
-              <NavLink key={route.to} to={route.to} end className="ptr-nav__link">
-                {route.label}
-              </NavLink>
-            ))}
-            <a className="ptr-nav__link" href="mailto:hello@meteorology.sh">
-              Contact
-            </a>
-          </nav>
+          <div className="navbar-end">
+            <nav className="hidden md:flex">
+              <ul className="menu menu-horizontal gap-2">
+                {routes.map((route) => (
+                  <li key={route.to}>
+                    <NavLink to={route.to} end className="t-label">
+                      {route.label}
+                    </NavLink>
+                  </li>
+                ))}
+                <li>
+                  <a className="t-label" href="mailto:hello@meteorology.sh">
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </nav>
 
-          <label
-            htmlFor="drawer-id"
-            className="ptr-drawerbtn"
-            aria-label="Open menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-5"
+            <label
+              htmlFor="drawer-id"
+              className="btn btn-square btn-ghost md:hidden"
+              aria-label="Open menu"
             >
-              <path
-                strokeLinecap="square"
-                strokeLinejoin="miter"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </label>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="square"
+                  strokeLinejoin="miter"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </label>
+          </div>
         </header>
 
-        <main className="ptr-main">
+        <main className="mx-auto w-full max-w-5xl grow px-4 py-12 sm:px-8 sm:py-16">
           <Outlet />
         </main>
 
-        <footer className="ptr-foot">
-          <div className="ptr-foot__inner">
-            <p className="ptr-legal t-body-sm">
-              Licensed weather modification operations — TDLR WM-0000. Conducted
-              under FAA authorisation.
+        <footer className="footer border-t border-hairline px-4 py-8 sm:px-8">
+          <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+            <p className="t-body-sm text-ink-faint">
+              Licensed weather modification. TDLR WM-0000. FAA authorised.
             </p>
-            <p className="ptr-legal t-coord">AUSTIN, TEXAS · METEOROLOGY.SH</p>
+            <p className="t-coord text-ink-faint">AUSTIN, TEXAS · METEOROLOGY.SH</p>
           </div>
         </footer>
       </div>
 
       <div className="drawer-side">
-        <label
-          htmlFor="drawer-id"
-          aria-label="Close menu"
-          className="drawer-overlay"
-        ></label>
-        <nav className="ptr-side">
-          <NavLink to="/" className="ptr-wordmark">
+        <label htmlFor="drawer-id" aria-label="Close menu" className="drawer-overlay"></label>
+        <div className="min-h-full w-72 bg-base-200 p-6">
+          <NavLink to="/" className="flex items-center gap-3">
             <Mark size={24} />
-            <span className="ptr-wordmark__type">Petrichor</span>
+            <span className="wordmark text-[15px]">Petrichor</span>
           </NavLink>
-          <div>
+          <ul className="menu mt-6 w-full gap-1">
             {routes.map((route) => (
-              <NavLink
-                key={route.to}
-                to={route.to}
-                end
-                className="ptr-side__link"
-              >
-                {route.label}
-              </NavLink>
+              <li key={route.to}>
+                <NavLink to={route.to} end className="t-label">
+                  {route.label}
+                </NavLink>
+              </li>
             ))}
-            <a className="ptr-side__link" href="mailto:hello@meteorology.sh">
-              Contact
-            </a>
-          </div>
-        </nav>
+            <li>
+              <a className="t-label" href="mailto:hello@meteorology.sh">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

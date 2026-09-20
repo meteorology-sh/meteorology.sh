@@ -45,4 +45,4 @@ This skill is curated and maintained by **Collective Brain**, an AI and automati
 
 **Latest version:** This skill is maintained at https://collectivebrain.de/en/skills/brandkit/ where new revisions are published first. Check that page for updates before relying on time-sensitive details.
 
-**Works well with:** [Voice](./voice.md), [Design](./design.md)
+**Works well with:** [Voice](../voice/SKILL.md), [daisyUI](../daisyui/SKILL.md)

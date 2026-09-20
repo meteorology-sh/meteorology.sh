@@ -4,18 +4,18 @@ import { useAppSelector } from "@/lib/store/hooks";
 const disciplines = [
   {
     label: "Aircraft",
-    title: "Quadcopters that fly into growing convective cells.",
-    body: "Airframes built in-house for the one job seeding actually needs — reaching cloud base fast, holding station in updraft, and releasing flares on a schedule the model picked. No pilot in the weather.",
+    title: "Quadcopters built for seeding runs.",
+    body: "Our airframes climb to cloud base, hold station in updraft, and release flares on schedule. We build them in Austin.",
   },
   {
     label: "Software",
-    title: "The sounding decides, not the operator's instinct.",
-    body: "We read the model sounding and the radar volume, find the band where seeding can do work, and clear the aircraft only when the cell qualifies. Every decision is logged against the case it was made from.",
+    title: "The sounding picks the target.",
+    body: "We read the model sounding and the radar volume. The software finds the band where seeding works and clears the aircraft. Every decision is logged.",
   },
   {
     label: "Research",
-    title: "Randomised cases, published either way.",
-    body: "Seeded and control cells assigned at random, gauge and radar-estimated rainfall reported with intervals. We publish the nulls. The field's credibility problem is our inheritance and this is the way out of it.",
+    title: "Randomised cases, published in full.",
+    body: "We assign seeded and control cells at random. We report rainfall with confidence intervals. We publish every result.",
   },
 ];
 
@@ -23,12 +23,12 @@ const notes = [
   {
     id: "PTN-004",
     title: "Hygroscopic seeding yield over the Edwards Plateau",
-    meta: "41 randomised cases · Preprint, not yet peer reviewed",
+    meta: "41 randomised cases. Preprint.",
   },
   {
     id: "PTN-003",
-    title: "Warm-cloud depth as an operational go/no-go threshold",
-    meta: "Method note · Data and code published",
+    title: "Warm-cloud depth as a go threshold",
+    meta: "Method note. Data and code published.",
   },
 ];
 
@@ -39,101 +39,99 @@ export const LandingPage = () => {
 
   return (
     <>
-      <section className="ptr-hero">
+      <section className="flex flex-col gap-12">
         <div>
-          <h1 className="ptr-hero__name">Petrichor</h1>
-          <p className="t-body-sm" style={{ color: "var(--ink-muted)", marginTop: "var(--space-4)" }}>
-            Rain enhancement, instrumented.
-          </p>
+          <h1 className="wordmark-hero">Petrichor</h1>
+          <p className="t-body-sm mt-4 text-ink-muted">Rain enhancement, instrumented.</p>
         </div>
 
-        <div className="ptr-bands" aria-hidden="true">
-          <i />
-          <i />
-          <i />
+        <div className="grid h-24 grid-cols-4 gap-4" aria-hidden="true">
+          <span className="col-span-2 bg-primary"></span>
+          <span className="bg-secondary"></span>
+          <span className="bg-accent"></span>
         </div>
 
-        <div style={{ display: "grid", gap: "var(--space-5)" }}>
-          <h2 className="ptr-hero__statement">We fly the clouds that make rain.</h2>
-          <p className="ptr-hero__lede t-body">
+        <div className="flex flex-col gap-6">
+          <h2 className="statement">We fly the clouds that make rain.</h2>
+          <p className="t-body max-w-[62ch] text-ink-muted">
             Petrichor is a rain enhancement laboratory in Austin, Texas. We build
-            unmanned aircraft and the software that decides where to fly them, we
-            operate under a Texas weather modification licence, and we publish what
-            we measure — including the cases where seeding did nothing.
+            unmanned aircraft. We write the software that picks the targets. We publish
+            our measurements.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-3)" }}>
-            <a className="ptr-btn ptr-btn--primary" href="#research">
+          <div className="flex flex-wrap gap-3">
+            <a className="btn btn-primary t-label" href="#research">
               Read the research
             </a>
-            <a className="ptr-btn ptr-btn--secondary" href="mailto:hello@meteorology.sh">
+            <a className="btn t-label" href="mailto:hello@meteorology.sh">
               Talk to us
             </a>
           </div>
         </div>
 
-        <div className="ptr-panel">
-          <div className="ptr-panel__head">
-            <h3 className="t-heading" style={{ margin: 0 }}>
-              Austin, Texas
-            </h3>
-            <span className="ptr-panel__coord t-coord">
-              N30°16.03'&nbsp;&nbsp;W97°44.58'
-            </span>
-          </div>
-          <div className="ptr-readout">
-            <span className="ptr-readout__label t-body">Ambient Temperature</span>
-            <span className="ptr-readout__value ptr-readout__value--accent t-data">
-              {temperature === undefined ? "—" : temperature.toFixed(1)}{" "}
-              <span className="ptr-readout__unit">°F</span>
-            </span>
-          </div>
-          <div className="ptr-readout" style={{ borderBottom: "none" }}>
-            <span className="ptr-readout__label t-body">Source</span>
-            <span className="ptr-readout__value t-data">
-              Open-Meteo <span className="ptr-readout__unit">surface analysis</span>
-            </span>
+        <div className="card border border-hairline bg-base-200">
+          <div className="card-body gap-0 p-6">
+            <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-hairline pb-3">
+              <h3 className="card-title t-heading">Austin, Texas</h3>
+              <span className="t-coord text-ink-muted">N30°16.03' W97°44.58'</span>
+            </div>
+            <table className="table">
+              <tbody>
+                <tr className="border-hairline">
+                  <td className="t-body px-0 text-ink-muted">Ambient temperature</td>
+                  <td className="t-data px-0 text-right text-accent">
+                    {temperature === undefined ? "—" : temperature.toFixed(1)}{" "}
+                    <span className="text-ink-faint">°F</span>
+                  </td>
+                </tr>
+                <tr className="border-hairline">
+                  <td className="t-body px-0 text-ink-muted">Source</td>
+                  <td className="t-data px-0 text-right">
+                    Open-Meteo <span className="text-ink-faint">surface analysis</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <section className="ptr-section">
-        <div className="ptr-section__head">
-          <h2 className="ptr-section__title t-subheading">What we do</h2>
-          <span className="t-coord" style={{ color: "var(--ink-faint)" }}>
-            THREE DISCIPLINES
-          </span>
+      <section className="mt-16">
+        <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
+          <h2 className="t-subheading text-ink-muted">What we do</h2>
+          <span className="t-coord text-ink-faint">THREE DISCIPLINES</span>
         </div>
-        <div className="ptr-rows">
+        <ul className="list">
           {disciplines.map((discipline) => (
-            <article className="ptr-row" key={discipline.label}>
-              <p className="ptr-row__index t-label">{discipline.label}</p>
-              <h3 className="ptr-row__title t-heading">{discipline.title}</h3>
-              <p className="ptr-row__body t-body">{discipline.body}</p>
-            </article>
+            <li
+              key={discipline.label}
+              className="list-row grid gap-2 border-b border-hairline px-0 py-6 md:grid-cols-[6rem_1fr_1.4fr] md:items-baseline md:gap-6"
+            >
+              <p className="t-label text-secondary">{discipline.label}</p>
+              <h3 className="t-heading">{discipline.title}</h3>
+              <p className="t-body max-w-[62ch] text-ink-muted">{discipline.body}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      <section className="ptr-section" id="research">
-        <div className="ptr-section__head">
-          <h2 className="ptr-section__title t-subheading">Technical notes</h2>
-          <span className="t-coord" style={{ color: "var(--ink-faint)" }}>
-            PETRICHOR TECHNICAL NOTES
-          </span>
+      <section className="mt-16" id="research">
+        <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
+          <h2 className="t-subheading text-ink-muted">Technical notes</h2>
+          <span className="t-coord text-ink-faint">PETRICHOR TECHNICAL NOTES</span>
         </div>
-        <div>
+        <ul className="list">
           {notes.map((note) => (
-            <article className="ptr-note" key={note.id}>
-              <p className="ptr-note__id t-coord">{note.id}</p>
-              <h3 className="ptr-note__title t-research-title">{note.title}</h3>
-              <p className="ptr-note__meta t-research-note">{note.meta}</p>
-            </article>
+            <li key={note.id} className="list-row grid gap-2 border-b border-hairline px-0 py-6">
+              <p className="t-coord text-secondary">{note.id}</p>
+              <h3 className="t-display-m">{note.title}</h3>
+              <p className="t-body-sm text-ink-faint">{note.meta}</p>
+            </li>
           ))}
-        </div>
-        <p className="t-body" style={{ color: "var(--ink-muted)", marginTop: "var(--space-5)" }}>
-          Every note carries the question, the method, the result with an interval,
-          what would falsify it, and a link to the data.{" "}
-          <a className="ptr-link" href="mailto:hello@meteorology.sh">
+        </ul>
+        <p className="t-body mt-6 max-w-[62ch] text-ink-muted">
+          Each note carries the question, the method, the result with an interval, and a
+          link to the data.{" "}
+          <a className="link text-accent" href="mailto:hello@meteorology.sh">
             Ask for a copy
           </a>
           .

@@ -1,28 +1,21 @@
 /* Petrichor design tokens — GENERATED from design/tokens.json by design/build-tokens.mjs.
-   Do not edit by hand: edit tokens.json and re-run the script.
-   Operations (dark) is the primary theme and the un-stamped default. */
+   Do not edit by hand. Edit tokens.json and re-run the script.
+   Five colours. Everything else in the system is derived from ground and ink. */
 
 :root {
   color-scheme: dark;
   --ground: #000000;
-  --surface: #0c0f0e;
-  --surface-raised: #171b19;
-  --surface-sunken: #050706;
-  --hairline: #252927;
-  --border: #626764;
-  --border-strong: #8f9c97;
   --ink: #ecf9ff;
-  --ink-muted: #8f9c97;
-  --ink-faint: #6d7a75;
-  --ink-inverse: #000000;
-  --verdigris: #365b4e;
-  --verdigris-deep: #1b382e;
-  --verdigris-bright: #74c9a0;
-  --on-verdigris: #ecf9ff;
-  --hygro: #74c9a0;
-  --caliche: #c8b78f;
-  --focus: #74c9a0;
-  --shadow-lift: 0 8px 24px rgba(0,0,0,0.72);
+  --primary: #365b4e;
+  --accent: #74c9a0;
+  --secondary: #c8b78f;
+
+  --surface: color-mix(in srgb, var(--ink) 4%, var(--ground));
+  --surface-raised: color-mix(in srgb, var(--ink) 9%, var(--ground));
+  --hairline: color-mix(in srgb, var(--ink) 14%, var(--ground));
+  --border: color-mix(in srgb, var(--ink) 38%, var(--ground));
+  --ink-faint: color-mix(in srgb, var(--ink) 52%, var(--ground));
+  --ink-muted: color-mix(in srgb, var(--ink) 62%, var(--ground));
 
   --space-1: 4px;
   --space-2: 8px;
@@ -33,107 +26,84 @@
   --space-8: 48px;
   --space-10: 64px;
 
-  --radius-none: 0;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-pill: 999px;
+  --radius-box: 0;
+  --radius-field: 2px;
+  --radius-selector: 999px;
 
-  --font-display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-sans: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
 }
 
-/* Paper — printed research and the press kit. Follows the OS, or opt in with data-theme. */
+/* Paper. Follows the OS, or opt in with data-theme. */
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]):not([data-theme="operations"]) {
+  :root:not([data-theme="operations"]) {
     color-scheme: light;
     --ground: #f4f2ed;
-    --surface: #ffffff;
-    --surface-raised: #eae7e0;
-    --surface-sunken: #e4e0d8;
-    --hairline: #d5d0c6;
-    --border: #8f8a7c;
-    --border-strong: #666c67;
     --ink: #10130f;
-    --ink-muted: #4a504b;
-    --ink-faint: #666c67;
-    --ink-inverse: #f4f2ed;
-    --verdigris: #2c4c41;
-    --verdigris-deep: #1b382e;
-    --verdigris-bright: #1a6044;
-    --on-verdigris: #ffffff;
-    --hygro: #1a6044;
-    --caliche: #7d6e44;
-    --focus: #1a6044;
-    --shadow-lift: 0 8px 24px rgba(16,19,15,0.14);
+    --primary: #2c4c41;
+    --accent: #1a6044;
+    --secondary: #756739;
+
+    --surface: color-mix(in srgb, var(--ink) 4%, var(--ground));
+    --surface-raised: color-mix(in srgb, var(--ink) 9%, var(--ground));
+    --hairline: color-mix(in srgb, var(--ink) 16%, var(--ground));
+    --border: color-mix(in srgb, var(--ink) 49%, var(--ground));
+    --ink-faint: color-mix(in srgb, var(--ink) 64%, var(--ground));
+    --ink-muted: color-mix(in srgb, var(--ink) 72%, var(--ground));
   }
 }
 
-[data-theme="light"], [data-theme="paper"] {
+[data-theme="paper"] {
   color-scheme: light;
   --ground: #f4f2ed;
-  --surface: #ffffff;
-  --surface-raised: #eae7e0;
-  --surface-sunken: #e4e0d8;
-  --hairline: #d5d0c6;
-  --border: #8f8a7c;
-  --border-strong: #666c67;
   --ink: #10130f;
-  --ink-muted: #4a504b;
-  --ink-faint: #666c67;
-  --ink-inverse: #f4f2ed;
-  --verdigris: #2c4c41;
-  --verdigris-deep: #1b382e;
-  --verdigris-bright: #1a6044;
-  --on-verdigris: #ffffff;
-  --hygro: #1a6044;
-  --caliche: #7d6e44;
-  --focus: #1a6044;
-  --shadow-lift: 0 8px 24px rgba(16,19,15,0.14);
+  --primary: #2c4c41;
+  --accent: #1a6044;
+  --secondary: #756739;
+
+  --surface: color-mix(in srgb, var(--ink) 4%, var(--ground));
+  --surface-raised: color-mix(in srgb, var(--ink) 9%, var(--ground));
+  --hairline: color-mix(in srgb, var(--ink) 16%, var(--ground));
+  --border: color-mix(in srgb, var(--ink) 49%, var(--ground));
+  --ink-faint: color-mix(in srgb, var(--ink) 64%, var(--ground));
+  --ink-muted: color-mix(in srgb, var(--ink) 72%, var(--ground));
 }
 
-[data-theme="dark"], [data-theme="operations"] {
+[data-theme="operations"] {
   color-scheme: dark;
   --ground: #000000;
-  --surface: #0c0f0e;
-  --surface-raised: #171b19;
-  --surface-sunken: #050706;
-  --hairline: #252927;
-  --border: #626764;
-  --border-strong: #8f9c97;
   --ink: #ecf9ff;
-  --ink-muted: #8f9c97;
-  --ink-faint: #6d7a75;
-  --ink-inverse: #000000;
-  --verdigris: #365b4e;
-  --verdigris-deep: #1b382e;
-  --verdigris-bright: #74c9a0;
-  --on-verdigris: #ecf9ff;
-  --hygro: #74c9a0;
-  --caliche: #c8b78f;
-  --focus: #74c9a0;
-  --shadow-lift: 0 8px 24px rgba(0,0,0,0.72);
+  --primary: #365b4e;
+  --accent: #74c9a0;
+  --secondary: #c8b78f;
+
+  --surface: color-mix(in srgb, var(--ink) 4%, var(--ground));
+  --surface-raised: color-mix(in srgb, var(--ink) 9%, var(--ground));
+  --hairline: color-mix(in srgb, var(--ink) 14%, var(--ground));
+  --border: color-mix(in srgb, var(--ink) 38%, var(--ground));
+  --ink-faint: color-mix(in srgb, var(--ink) 52%, var(--ground));
+  --ink-muted: color-mix(in srgb, var(--ink) 62%, var(--ground));
 }
 
 /* Type scale */
 /* Display */
 .t-display-xl {
-  font-family: var(--font-display);
-  font-size: 76px;
-  line-height: 72px;
+  font-family: var(--font-sans);
+  font-size: 64px;
+  line-height: 61px;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .t-display-l {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: 44px;
   line-height: 46px;
   font-weight: 600;
   letter-spacing: -0.015em;
 }
 .t-display-m {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: 28px;
   line-height: 32px;
   font-weight: 600;
@@ -198,25 +168,4 @@
   font-weight: 400;
   letter-spacing: 0.06em;
   font-variant-numeric: tabular-nums;
-}
-
-/* Research */
-.t-research-title {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  line-height: 32px;
-  font-weight: 600;
-}
-.t-research-body {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  line-height: 28px;
-  font-weight: 400;
-}
-.t-research-note {
-  font-family: var(--font-serif);
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 400;
-  font-style: italic;
 }

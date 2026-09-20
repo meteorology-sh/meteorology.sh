@@ -27,6 +27,23 @@ docker compose up
 docker compose -f docker-compose.prod.yaml up
 ```
 
+## Project Skills — read these before you write anything
+
+This repo carries its own skills in `.claude/skills/<name>/SKILL.md`. They are
+**binding conventions, not references.** Claude Code loads them automatically; if for any
+reason they do not appear in your available-skills list, read them off disk before
+starting work.
+
+| Skill | Load it before |
+| --- | --- |
+| `voice` | Writing **any** user-facing copy — component text, headings, docs, commit-adjacent prose. Enforced on every string that ships. |
+| `brand` | Any identity work: brand boards, logos, palettes, type pairing, mockups. Defines the required output format and hard caps (≤6 colors, ≤2 type families). |
+| `daisyui` | Any HTML or JSX. Use daisyUI component classes; do not hand-roll a parallel component layer. |
+
+If a skill's rule conflicts with your own judgement, the skill wins. If it conflicts with
+a direct instruction from the user in the conversation, the user wins — say which rule you
+are setting aside and why.
+
 ## Shared Principles
 
 - **One job per file, a predictable home for it.** Infrastructure (`lib/`) is

@@ -1,83 +1,77 @@
 // Store
 import { useAppSelector } from "@/lib/store/hooks";
 
+const facts = [
+  {
+    label: "Where",
+    title: "Austin, Texas",
+    body: "We operate over the Edwards Plateau and the Hill Country. Warm-cloud depth there supports hygroscopic seeding.",
+  },
+  {
+    label: "What",
+    title: "Aircraft and software, both built here.",
+    body: "We build the airframes and write the decision software in Austin.",
+  },
+  {
+    label: "Licence",
+    title: "We hold a Texas weather modification licence.",
+    body: "We file every operation with the TDLR and fly under FAA authorisation.",
+  },
+];
+
 export const About = () => {
-  const string: string | undefined = useAppSelector(
-    (state) => state.data.string
-  );
+  const string: string | undefined = useAppSelector((state) => state.data.string);
 
   return (
     <>
-      <section className="ptr-hero">
-        <div>
-          <h1 className="ptr-hero__statement">
-            A small lab that would rather be checked than believed.
-          </h1>
-          <p className="ptr-hero__lede t-body" style={{ marginTop: "var(--space-5)" }}>
-            Cloud seeding has a long history of overstatement. Our advantage is
-            that we do not do it. Petrichor runs randomised cases over Texas,
-            reports the intervals, and publishes the results whether or not they
-            favour us.
-          </p>
-        </div>
+      <section className="flex flex-col gap-6">
+        <h1 className="statement">We publish our data so you can check it.</h1>
+        <p className="t-body max-w-[62ch] text-ink-muted">
+          Petrichor runs randomised seeding missions over Texas. We measure the rainfall,
+          report the intervals, and publish every result.
+        </p>
       </section>
 
-      <section className="ptr-section">
-        <div className="ptr-section__head">
-          <h2 className="ptr-section__title t-subheading">The lab</h2>
+      <section className="mt-16">
+        <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
+          <h2 className="t-subheading text-ink-muted">The lab</h2>
         </div>
-        <div className="ptr-rows">
-          <article className="ptr-row">
-            <p className="ptr-row__index t-label">Where</p>
-            <h3 className="ptr-row__title t-heading">Austin, Texas</h3>
-            <p className="ptr-row__body t-body">
-              Headquartered in Austin. Operations run over the Edwards Plateau and
-              the Hill Country, where warm-cloud depth is deep enough for
-              hygroscopic seeding to do measurable work.
-            </p>
-          </article>
-          <article className="ptr-row">
-            <p className="ptr-row__index t-label">What</p>
-            <h3 className="ptr-row__title t-heading">
-              Unmanned aircraft, and the software that flies them
-            </h3>
-            <p className="ptr-row__body t-body">
-              We build the airframes and we write the decision software. Nothing
-              about the stack is off the shelf, because nothing off the shelf was
-              built to put a flare inside a growing cell on a model's schedule.
-            </p>
-          </article>
-          <article className="ptr-row">
-            <p className="ptr-row__index t-label">Not</p>
-            <h3 className="ptr-row__title t-heading">
-              This is not geoengineering
-            </h3>
-            <p className="ptr-row__body t-body">
-              We enhance rainfall in a defined airspace under a state licence,
-              filing every operation with the TDLR. That is a different activity
-              from climate intervention and the distinction matters. Ask us about
-              it directly — we will answer plainly.
-            </p>
-          </article>
-        </div>
+        <ul className="list">
+          {facts.map((fact) => (
+            <li
+              key={fact.label}
+              className="list-row grid gap-2 border-b border-hairline px-0 py-6 md:grid-cols-[6rem_1fr_1.4fr] md:items-baseline md:gap-6"
+            >
+              <p className="t-label text-secondary">{fact.label}</p>
+              <h3 className="t-heading">{fact.title}</h3>
+              <p className="t-body max-w-[62ch] text-ink-muted">{fact.body}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="ptr-section">
-        <div className="ptr-section__head">
-          <h2 className="ptr-section__title t-subheading">Contact</h2>
+      <section className="mt-16">
+        <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
+          <h2 className="t-subheading text-ink-muted">Contact</h2>
         </div>
-        <div className="ptr-panel" style={{ marginTop: "var(--space-5)" }}>
-          <div className="ptr-readout">
-            <span className="ptr-readout__label t-body">Operations</span>
-            <span className="ptr-readout__value t-data">hello@meteorology.sh</span>
-          </div>
-          <div className="ptr-readout">
-            <span className="ptr-readout__label t-body">Research</span>
-            <span className="ptr-readout__value t-data">hello@meteorology.sh</span>
-          </div>
-          <div className="ptr-readout" style={{ borderBottom: "none" }}>
-            <span className="ptr-readout__label t-body">Build</span>
-            <span className="ptr-readout__value t-data">{string ?? "—"}</span>
+        <div className="card mt-6 border border-hairline bg-base-200">
+          <div className="card-body p-6">
+            <table className="table">
+              <tbody>
+                <tr className="border-hairline">
+                  <td className="t-body px-0 text-ink-muted">Operations</td>
+                  <td className="t-data px-0 text-right">hello@meteorology.sh</td>
+                </tr>
+                <tr className="border-hairline">
+                  <td className="t-body px-0 text-ink-muted">Research</td>
+                  <td className="t-data px-0 text-right">hello@meteorology.sh</td>
+                </tr>
+                <tr className="border-hairline">
+                  <td className="t-body px-0 text-ink-muted">Build</td>
+                  <td className="t-data px-0 text-right">{string ?? "—"}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
