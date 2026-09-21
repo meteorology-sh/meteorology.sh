@@ -24,7 +24,16 @@ const Mark = ({ size = 28 }: { size?: number }) => (
 const routes = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/research", label: "Research" },
 ];
+
+// The active tab carries a primary underline. daisyUI's menu has no such
+// state, so the border is set here with utilities.
+const tabClass = ({ isActive }: { isActive: boolean }) =>
+  [
+    "t-label rounded-none border-b-2",
+    isActive ? "border-primary" : "border-transparent",
+  ].join(" ");
 
 export const App = () => {
   return (
@@ -45,16 +54,11 @@ export const App = () => {
               <ul className="menu menu-horizontal gap-2">
                 {routes.map((route) => (
                   <li key={route.to}>
-                    <NavLink to={route.to} end className="t-label">
+                    <NavLink to={route.to} end className={tabClass}>
                       {route.label}
                     </NavLink>
                   </li>
                 ))}
-                <li>
-                  <a className="t-label" href="mailto:hello@meteorology.sh">
-                    Contact
-                  </a>
-                </li>
               </ul>
             </nav>
 
@@ -109,16 +113,11 @@ export const App = () => {
           <ul className="menu mt-6 w-full gap-1">
             {routes.map((route) => (
               <li key={route.to}>
-                <NavLink to={route.to} end className="t-label">
+                <NavLink to={route.to} end className={tabClass}>
                   {route.label}
                 </NavLink>
               </li>
             ))}
-            <li>
-              <a className="t-label" href="mailto:hello@meteorology.sh">
-                Contact
-              </a>
-            </li>
           </ul>
         </div>
       </div>

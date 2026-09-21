@@ -8,6 +8,7 @@ import {
 import { App } from "@/app/App.tsx";
 import { LandingPage } from "@/app/components/LandingPage";
 import { About } from "@/app/components/About";
+import { Research } from "@/app/components/Research";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/research",
+        element: <Research />,
       },
     ],
   },

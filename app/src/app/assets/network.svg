@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 192" role="img" aria-label="Neural network">
+  <g fill="none" stroke="#ecf9ff" stroke-width="11" stroke-linecap="round">
+    <path d="M56 60 L58 138" />
+    <path d="M56 60 L146 98" />
+    <path d="M56 60 L146 160" />
+    <path d="M58 138 L138 34" />
+    <path d="M58 138 L146 98" />
+    <path d="M138 34 L214 112" />
+    <path d="M146 98 L214 112" />
+    <path d="M146 160 L214 112" />
+  </g>
+  <g fill="#ecf9ff">
+    <circle cx="56" cy="60" r="27" />
+    <circle cx="58" cy="138" r="27" />
+    <circle cx="138" cy="34" r="21" />
+    <circle cx="146" cy="98" r="20" />
+    <circle cx="214" cy="112" r="25" />
+    <circle cx="146" cy="160" r="20" />
+  </g>
+</svg>

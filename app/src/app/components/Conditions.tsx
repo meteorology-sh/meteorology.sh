@@ -67,8 +67,25 @@ export const Conditions = () => {
   return (
     <div className="card border border-hairline bg-base-200">
       <div className="card-body gap-0 p-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-hairline pb-3">
-          <h3 className="card-title t-heading">Austin, Texas</h3>
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-hairline pb-3">
+          <div className="flex items-center gap-3">
+            <h3 className="card-title t-heading">Austin, Texas</h3>
+            {/* The dot reports the fetch, so it cannot read live before the
+                first reading lands. The aura is the glow around it. */}
+            <span className="flex items-center gap-2">
+              <span
+                className={`aura aura-xs ${conditions ? "text-accent" : "text-ink-faint"}`}
+                aria-hidden="true"
+              >
+                <span
+                  className={`status status-sm ${conditions ? "status-accent motion-safe:animate-pulse" : ""}`}
+                ></span>
+              </span>
+              <span className="t-coord text-ink-muted">
+                {conditions ? "LIVE" : "WAITING"}
+              </span>
+            </span>
+          </div>
           <span className="t-coord text-ink-muted">N30°16.03' W97°44.58'</span>
         </div>
         <table className="table">
