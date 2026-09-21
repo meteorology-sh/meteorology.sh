@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "format": "prettier --write src/",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "cloud": "aws s3 sync dist/ s3://meteorology.sh --delete --exclude index.html --cache-control public,max-age=31536000,immutable && aws s3 cp dist/index.html s3://meteorology.sh/index.html --cache-control no-cache",
+    "cache": "aws cloudfront create-invalidation --distribution-id E1SSVBG054QZM6 --paths \"/*\"",
+    "deploy": "npm run build && npm run cloud && npm run cache"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
