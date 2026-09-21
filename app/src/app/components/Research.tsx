@@ -17,7 +17,7 @@ export const Research = () => {
       <section className="mt-16">
         <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
           <h2 className="t-subheading text-ink-muted">Weatherman</h2>
-          <span className="t-coord text-ink-faint">SOFTWARE</span>
+          <span className="t-coord text-accent">SOFTWARE</span>
         </div>
 
         <div className="grid gap-8 py-8 md:grid-cols-[1fr_1.4fr] md:items-start">
@@ -55,20 +55,21 @@ export const Research = () => {
       <section className="mt-16">
         <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
           <h2 className="t-subheading text-ink-muted">Automata</h2>
-          <span className="t-coord text-ink-faint">NEURAL NETWORKS</span>
+          <span className="t-coord text-accent">NEURAL NETWORKS</span>
         </div>
 
         <div className="grid gap-8 py-8 md:grid-cols-[1fr_1.4fr] md:items-start">
           <div className="flex flex-col gap-4">
             <h3 className="t-heading">Reinforcement Learning</h3>
             <p className="t-body max-w-[62ch] text-ink-muted">
-              Automata is a reinforcement learning harness conceptualizes the
-              mission space and physics of cloud formations.
+              Automata is a reinforcement learning harness. Agents conceptualize
+              the mission space and physics of cloud formations, and design
+              model policy.
               <br />
               <br />
-              Automata refines a terminal destination policy, leveraging a suite
-              of onboard sensors to explore the atmosphere for supercooled
-              liquid water.
+              Automata refines a terminal destination policy, reading synthetic
+              data through suite of onboard sensors to explore the atmosphere
+              for supercooled liquid water.
               <br />
               <br />A publication is forthcoming and in literature review.
             </p>
@@ -89,7 +90,7 @@ export const Research = () => {
       <section className="mt-16">
         <div className="flex items-baseline justify-between gap-4 border-b border-hairline pb-4">
           <h2 className="t-subheading text-ink-muted">Hyades</h2>
-          <span className="t-coord text-ink-faint">DRONES</span>
+          <span className="t-coord text-accent">DRONES</span>
         </div>
 
         <div className="grid gap-8 py-8 md:grid-cols-[1fr_1.4fr] md:items-start">
@@ -101,7 +102,12 @@ export const Research = () => {
               <br />
               <br />
               Each aircraft in the Hyades fleet is an NDAA compliant quadcopter,
-              with a prototype under development.
+              with a prototype under development. The aircraft is designed to
+              deliver a 1.5kg cloud accelerant to the 18,000 ft flight ceiling
+              in a 40 minute sortie.
+              <br />
+              <br />
+              Petrichor develops an aircraft in-house for $2800.
             </p>
           </div>
 

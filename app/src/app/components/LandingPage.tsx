@@ -4,24 +4,6 @@ import { NavLink } from "react-router";
 // Components
 import { Conditions } from "./Conditions";
 
-const disciplines = [
-  {
-    label: "Aircraft",
-    title: "Quadcopters built for seeding runs.",
-    body: "Our airframes climb to cloud base, hold station in updraft, and release flares on schedule. We build them in Austin.",
-  },
-  {
-    label: "Software",
-    title: "The sounding picks the target.",
-    body: "We read the model sounding and the radar volume. The software finds the band where seeding works and clears the aircraft. Every decision is logged.",
-  },
-  {
-    label: "Research",
-    title: "Randomised cases, published in full.",
-    body: "We assign seeded and control cells at random. We report rainfall with confidence intervals. We publish every result.",
-  },
-];
-
 export const LandingPage = () => {
   return (
     <>
@@ -41,11 +23,14 @@ export const LandingPage = () => {
           <h2 className="statement">
             Rain enhancement research for Texas storms
           </h2>
-          <p className="t-body max-w-1/2 text-ink-muted">
+          <p className="t-body min-w-1/2 text-ink-muted">
             Petrichor is a small laboratory founded in Austin, Texas. We develop
             research in open source software and aeronautics for meteorologists.
           </p>
           <div className="flex flex-wrap gap-3">
+            <NavLink className="btn btn-primary t-label" to="/about">
+              About
+            </NavLink>
             <NavLink className="btn btn-primary t-label" to="/research">
               Research
             </NavLink>
