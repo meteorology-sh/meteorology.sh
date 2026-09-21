@@ -1,9 +1,9 @@
 import { expect, isNarrow, test } from "./fixtures";
 
 const routes = [
-  { path: "/", heading: "Petrichor" },
-  { path: "/about", heading: "meteorology.sh" },
-  { path: "/research", heading: "Research" },
+  { path: "/", heading: "Petrichor", title: "Petrichor — Rain Enhancement" },
+  { path: "/about", heading: "meteorology.sh", title: "About — Petrichor" },
+  { path: "/research", heading: "Research", title: "Research — Petrichor" },
 ];
 
 for (const route of routes) {
@@ -14,6 +14,12 @@ for (const route of routes) {
       await expect(
         page.getByRole("heading", { level: 1, name: route.heading })
       ).toBeVisible();
+    });
+
+    test("sets its title", async ({ page }) => {
+      await page.goto(route.path);
+
+      await expect(page).toHaveTitle(route.title);
     });
 
     test("never scrolls sideways", async ({ page }) => {

@@ -5,6 +5,9 @@ import { useState } from "react";
 import { Outlet, ScrollRestoration } from "react-router";
 import { NavLink } from "react-router";
 
+// Hooks
+import { usePageMeta } from "@/lib/hooks/usePageMeta";
+
 // Styles
 import "./App.css";
 
@@ -40,6 +43,7 @@ const tabClass = ({ isActive }: { isActive: boolean }) =>
 
 export const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  usePageMeta();
 
   return (
     <div className="drawer">
