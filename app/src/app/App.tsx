@@ -1,5 +1,8 @@
+// React
+import { useState } from "react";
+
 // Router
-import { Outlet } from "react-router";
+import { Outlet, ScrollRestoration } from "react-router";
 import { NavLink } from "react-router";
 
 // Styles
@@ -36,9 +39,18 @@ const tabClass = ({ isActive }: { isActive: boolean }) =>
   ].join(" ");
 
 export const App = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <div className="drawer">
-      <input id="drawer-id" type="checkbox" className="drawer-toggle" />
+      <ScrollRestoration />
+      <input
+        id="drawer-id"
+        type="checkbox"
+        className="drawer-toggle"
+        checked={drawerOpen}
+        onChange={(event) => setDrawerOpen(event.target.checked)}
+      />
 
       <div className="drawer-content flex min-h-dvh flex-col">
         <header className="navbar border-b border-hairline px-4 sm:px-8">
@@ -106,14 +118,23 @@ export const App = () => {
           className="drawer-overlay"
         ></label>
         <div className="min-h-full w-72 bg-base-200 p-6">
-          <NavLink to="/" className="flex items-center gap-3">
+          <NavLink
+            to="/"
+            className="flex items-center gap-3"
+            onClick={() => setDrawerOpen(false)}
+          >
             <Mark size={24} />
             <span className="wordmark text-[15px]">Petrichor</span>
           </NavLink>
           <ul className="menu mt-6 w-full gap-1">
             {routes.map((route) => (
               <li key={route.to}>
-                <NavLink to={route.to} end className={tabClass}>
+                <NavLink
+                  to={route.to}
+                  end
+                  className={tabClass}
+                  onClick={() => setDrawerOpen(false)}
+                >
                   {route.label}
                 </NavLink>
               </li>
