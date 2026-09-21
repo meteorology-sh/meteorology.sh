@@ -46,6 +46,8 @@ export const Research = () => {
           <div className="mockup-window rounded-md border border-hairline bg-base-200 pt-2.5 before:mb-2 before:h-2 before:shadow-[0.875rem_0_0_currentColor,1.75rem_0_0_currentColor,2.625rem_0_0_currentColor]">
             <img
               src={weatherman}
+              width={1910}
+              height={949}
               alt="weatherman dashboard showing radar, cloud, and environment readings beside a map"
               className="w-full"
             />
@@ -81,6 +83,8 @@ export const Research = () => {
             <div className="flex min-h-64 items-center justify-center p-8">
               <img
                 src={neural}
+                width={256}
+                height={192}
                 alt="a neural network of six nodes joined by weighted edges"
                 className="w-full max-w-56"
               />
@@ -116,6 +120,8 @@ export const Research = () => {
           <div className="mockup-window rounded-md border border-hairline bg-base-200 pt-2.5 before:mb-2 before:h-2 before:shadow-[0.875rem_0_0_currentColor,1.75rem_0_0_currentColor,2.625rem_0_0_currentColor]">
             <img
               src={hyades}
+              width={1134}
+              height={766}
               alt="a hyades quadcopter render"
               className="w-full"
             />
