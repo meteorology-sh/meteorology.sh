@@ -1,6 +1,7 @@
 // Assets
 import weatherman from "@/app/assets/weatherman.png";
 import neural from "@/app/assets/network.svg";
+import hyades from "@/app/assets/hyades.png";
 
 export const Research = () => {
   return (
@@ -44,7 +45,7 @@ export const Research = () => {
           <div className="mockup-window rounded-md border border-hairline bg-base-200 pt-2.5 before:mb-2 before:h-2 before:shadow-[0.875rem_0_0_currentColor,1.75rem_0_0_currentColor,2.625rem_0_0_currentColor]">
             <img
               src={weatherman}
-              alt="The Weatherman dashboard showing radar, cloud, and environment readings beside a map of central Texas"
+              alt="weatherman dashboard showing radar, cloud, and environment readings beside a map"
               className="w-full"
             />
           </div>
@@ -77,7 +78,7 @@ export const Research = () => {
             <div className="flex min-h-64 items-center justify-center p-8">
               <img
                 src={neural}
-                alt="A neural network of six nodes joined by weighted edges"
+                alt="a neural network of six nodes joined by weighted edges"
                 className="w-full max-w-56"
               />
             </div>
@@ -105,7 +106,11 @@ export const Research = () => {
           </div>
 
           <div className="mockup-window rounded-md border border-hairline bg-base-200 pt-2.5 before:mb-2 before:h-2 before:shadow-[0.875rem_0_0_currentColor,1.75rem_0_0_currentColor,2.625rem_0_0_currentColor]">
-            <img alt="" className="w-full" />
+            <img
+              src={hyades}
+              alt="a hyades quadcopter render"
+              className="w-full"
+            />
           </div>
         </div>
       </section>
