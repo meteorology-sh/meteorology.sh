@@ -1,0 +1,15 @@
+# Petrichor
+
+> Petrichor is a small research laboratory founded in Austin, Texas. This research involves cloud seeding for rain enhancement across Texas. Petrichor develops open source software, neural networks, and quadcopter drones.
+
+The full text of every page is in one file: [llms-full.txt](https://meteorology.sh/llms-full.txt).
+
+## Pages
+
+- [Home](https://meteorology.sh/): Rain enhancement research for Texas storms, with current weather conditions over Austin.
+- [About](https://meteorology.sh/about): Who we are, what cloud seeding is about, and how it serves the natural resource interests of Texas.
+- [Research](https://meteorology.sh/research): An overview of Weatherman, a decision science platform; Automata, a reinforcement learning harness; and Hyades, the quadcopter drone platform.
+
+## Full text
+
+- [llms-full.txt](https://meteorology.sh/llms-full.txt): The text of every page on this site, in Markdown.

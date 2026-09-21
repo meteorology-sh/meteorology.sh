@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "e2e": "playwright test",
-    "cloud": "aws s3 sync dist/ s3://meteorology.sh --delete --exclude index.html --cache-control public,max-age=31536000,immutable && aws s3 cp dist/index.html s3://meteorology.sh/index.html --cache-control no-cache",
+    "cloud": "aws s3 sync dist/ s3://meteorology.sh --delete --exclude index.html --exclude robots.txt --exclude sitemap.xml --exclude \"llms*.txt\" --cache-control public,max-age=31536000,immutable && aws s3 sync dist/ s3://meteorology.sh --exclude \"*\" --include index.html --include robots.txt --include sitemap.xml --include \"llms*.txt\" --cache-control no-cache",
     "cache": "aws cloudfront create-invalidation --distribution-id E1SSVBG054QZM6 --paths \"/*\"",
     "deploy": "npm run build && npm run cloud && npm run cache"
   },
