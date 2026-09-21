@@ -9,8 +9,8 @@ export const Research = () => {
       <section className="flex flex-col gap-6">
         <h1 className="statement">Research</h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
-          Petrichor develops bespoke cloud seeding technology in both software
-          and hardware.
+          Petrichor develops bespoke cloud seeding technology, and the products
+          of this research are shared with the public.
         </p>
       </section>
 
@@ -24,19 +24,20 @@ export const Research = () => {
           <div className="flex flex-col gap-4">
             <h3 className="t-heading">Decision Science</h3>
             <p className="t-body max-w-[62ch] text-ink-muted">
-              Weatherman is a decision science and evaluation platform. It
-              sources meteorological criteria from literature and stacks
-              geospatial data on a map. The data paints cloud formations whose
-              physics are optimal targets for cloud seeding.
+              Weatherman is a decision science platform. It reads meteorological
+              timeseries data and stacks spatial layers on a map. These data
+              highlight cloud formations whose physics are optimal candidates
+              for cloud seeding.
               <br />
               <br />
               Weatherman collates metadata from a combination of NOAA data
-              sources, including both modeled and measured quantities.
+              sources, including national radar mosaics, satellites, and
+              advanced models.
               <br />
               <br />
-              The software is interrogated and replicates the meteorological
-              decision science in historical cloud seeding operations across
-              Texas.
+              The software is evaluated and found to have an 86.6% concordance
+              with meteorological decision science in historical cloud seeding
+              operations across Texas.
               <br />
               <br />A publication is forthcoming and under peer review.
             </p>
@@ -62,13 +63,14 @@ export const Research = () => {
           <div className="flex flex-col gap-4">
             <h3 className="t-heading">Reinforcement Learning</h3>
             <p className="t-body max-w-[62ch] text-ink-muted">
-              Automata is a reinforcement learning harness. Agents conceptualize
-              the mission space and physics of cloud formations, and design
-              model policy.
+              Automata is a reinforcement learning harness. The harness designs
+              a model policy and runtime, and learns the physics that accrue
+              rewards. It ships a checkpoint small enough to run on a flight
+              computer.
               <br />
               <br />
               Automata refines a terminal destination policy, reading synthetic
-              data through suite of onboard sensors to explore the atmosphere
+              data through a suite of onboard sensors to explore the atmosphere
               for supercooled liquid water.
               <br />
               <br />A publication is forthcoming and in literature review.
@@ -102,9 +104,9 @@ export const Research = () => {
               <br />
               <br />
               Each aircraft in the Hyades fleet is an NDAA compliant quadcopter,
-              with a prototype under development. The aircraft is designed to
-              deliver a 1.5kg cloud accelerant to the 18,000 ft flight ceiling
-              in a 40 minute sortie.
+              with a prototype under development. The aircraft is designed to a
+              spec defined by the average Texas cloud seeding sortie. It
+              delivers a 1.5 kg reagent to 18,000 ft in a 40 minute mission.
               <br />
               <br />
               Petrichor develops an aircraft in-house for $2800.
