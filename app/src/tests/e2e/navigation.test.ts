@@ -21,7 +21,7 @@ test("the drawer closes after a link is followed", async ({
   test.skip(!isNarrow(viewport?.width), "The drawer is for narrow screens");
 
   await page.goto("/");
-  await page.getByLabel("Open menu").click();
+  await page.getByRole("button", { name: "Open menu" }).click();
 
   const drawer = page.locator(".drawer-side");
   await drawer.getByRole("link", { name: "Research" }).click();
@@ -29,4 +29,23 @@ test("the drawer closes after a link is followed", async ({
   await expect(page).toHaveURL("/research");
   await expect(page.locator("#drawer-id")).not.toBeChecked();
   await expect(drawer.getByRole("link", { name: "Research" })).toBeHidden();
+});
+
+test("the overlay closes the drawer", async ({ page, viewport }) => {
+  test.skip(!isNarrow(viewport?.width), "The drawer is for narrow screens");
+
+  await page.goto("/");
+  const menu = page.getByRole("button", { name: "Open menu" });
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+
+  await menu.click();
+  await expect(menu).toHaveAttribute("aria-expanded", "true");
+
+  // The drawer panel covers the overlay's left edge, so click its right side.
+  const overlay = page.getByRole("button", { name: "Close menu" });
+  const box = (await overlay.boundingBox())!;
+  await page.mouse.click(box.x + box.width - 10, box.y + box.height / 2);
+
+  await expect(page.locator("#drawer-id")).not.toBeChecked();
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
 });

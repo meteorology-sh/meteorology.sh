@@ -44,7 +44,7 @@ test("shows the header links on wide screens only", async ({
   await page.goto("/");
 
   const links = page.getByRole("navigation");
-  const menu = page.getByLabel("Open menu");
+  const menu = page.getByRole("button", { name: "Open menu" });
 
   if (isNarrow(viewport?.width)) {
     await expect(links).toBeHidden();

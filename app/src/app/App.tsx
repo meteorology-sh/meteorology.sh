@@ -48,12 +48,17 @@ export const App = () => {
   return (
     <div className="drawer">
       <ScrollRestoration />
+      {/* daisyUI's drawer reads this checkbox for its open state. The buttons
+          below drive it, so it stays out of the tab order and the
+          accessibility tree. */}
       <input
         id="drawer-id"
         type="checkbox"
         className="drawer-toggle"
         checked={drawerOpen}
-        onChange={(event) => setDrawerOpen(event.target.checked)}
+        readOnly
+        tabIndex={-1}
+        aria-hidden="true"
       />
 
       <div className="drawer-content flex min-h-dvh flex-col">
@@ -78,10 +83,12 @@ export const App = () => {
               </ul>
             </nav>
 
-            <label
-              htmlFor="drawer-id"
+            <button
+              type="button"
               className="btn btn-square btn-ghost md:hidden"
               aria-label="Open menu"
+              aria-expanded={drawerOpen}
+              onClick={() => setDrawerOpen(true)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +104,7 @@ export const App = () => {
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
               </svg>
-            </label>
+            </button>
           </div>
         </header>
 
@@ -116,11 +123,12 @@ export const App = () => {
       </div>
 
       <div className="drawer-side">
-        <label
-          htmlFor="drawer-id"
+        <button
+          type="button"
           aria-label="Close menu"
           className="drawer-overlay"
-        ></label>
+          onClick={() => setDrawerOpen(false)}
+        ></button>
         <div className="min-h-full w-72 bg-base-200 p-6">
           <NavLink
             to="/"
