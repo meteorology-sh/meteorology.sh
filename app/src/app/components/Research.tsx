@@ -109,7 +109,7 @@ export const Research = () => {
               delivers a 1.5 kg reagent to 18,000 ft in a 40 minute mission.
               <br />
               <br />
-              Petrichor develops an aircraft in-house for $2800.
+              Petrichor develops an aircraft for $2800.
             </p>
           </div>
 
