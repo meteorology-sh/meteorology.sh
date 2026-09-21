@@ -25,9 +25,7 @@ export const About = () => {
         </h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
           Petrichor is a small laboratory working towards the benefit of natural
-          resources in the state of Texas. The software is open-source, and the
-          research methodology contributes to a canon of open access scientific
-          literature.
+          resources in the state of Texas.
         </p>
       </section>
 
