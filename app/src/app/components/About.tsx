@@ -2,17 +2,17 @@ const facts = [
   {
     label: "Who",
     title: "The Engineers",
-    body: "Engineers in hardware and software research",
+    body: "Developed by engineers in hardware and software research, based in Austin.",
   },
   {
     label: "What",
     title: "Cloud Seeding",
-    body: "Enhanced rainfall output of convective storms in the state of Texas",
+    body: "In the 1940s, American research in aeronautics led investigators to study the physics of condensation in the cold, higher altitudes of the atmosphere. In discovering a methodology through which supercooled liquid water droplets could be coaxed together into precipitation, early research culminated in a technological advancement, cloud seeding, the technology of making rain. A cloud is seeded by various materials in the form of crystalline dust, which nucleate supercooled liquid water and precipitate from the sky.",
   },
   {
     label: "Why",
     title: "Natural Resources",
-    body: "For the benefit of Texas resevoirs, aquifers, and natural resource economy",
+    body: "The state of Texas has enormous water reserves in the form of surface level reservoirs, and groundwater aquifers. These water sources are commonly replenished throughout biannual rainy seasons, which present as dramatic storms, but because of its advanced economy, and very hot climate, the state is subject to drought pressure in the dry seasons.",
   },
 ];
 
@@ -25,7 +25,9 @@ export const About = () => {
         </h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
           Petrichor is a small laboratory working towards the benefit of natural
-          resources in the state of Texas.
+          resources in the state of Texas. The software is open-source, and the
+          research methodology contributes to a canon of open access scientific
+          literature.
         </p>
       </section>
 

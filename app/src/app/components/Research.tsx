@@ -97,7 +97,7 @@ export const Research = () => {
           <div className="flex flex-col gap-4">
             <h3 className="t-heading">Aircraft</h3>
             <p className="t-body max-w-[62ch] text-ink-muted">
-              The Hyades are a mythological sisterhood whose presence precedes
+              The Hyades are a mythological sisterhood whose arrival precedes
               rain.
               <br />
               <br />

@@ -21,7 +21,7 @@ export const LandingPage = () => {
 
         <div className="flex flex-col gap-6">
           <h2 className="statement">
-            Rain enhancement research for Texas storms
+            Rain enhancement research, for Texas storms
           </h2>
           <p className="t-body min-w-1/2 text-ink-muted">
             Petrichor is a small laboratory founded in Austin, Texas. We develop
