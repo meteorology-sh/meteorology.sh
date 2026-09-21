@@ -20,8 +20,8 @@ export const About = () => {
   return (
     <>
       <section className="flex flex-col gap-6">
-        <h1 className="statement flex">
-          meteorology<div className="text-accent">.sh</div>
+        <h1 className="statement">
+          meteorology<span className="text-accent">.sh</span>
         </h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
           Petrichor is a small laboratory working towards the benefit of natural

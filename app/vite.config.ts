@@ -1,5 +1,5 @@
 import path from 'path';
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 
 // Plugins
 import react from "@vitejs/plugin-react";
@@ -10,6 +10,8 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
+    // Playwright runs these, not Vitest.
+    exclude: [...configDefaults.exclude, "src/tests/e2e/**"],
   },
   resolve: {
     alias: {
