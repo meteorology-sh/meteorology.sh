@@ -66,9 +66,8 @@ export const Research = () => {
             <h3 className="t-heading">Reinforcement Learning</h3>
             <p className="t-body max-w-[62ch] text-ink-muted">
               Automata is a reinforcement learning harness. The harness designs
-              a model policy and runtime, and learns the physics that accrue
-              rewards. It ships a checkpoint small enough to run on a flight
-              computer.
+              a model policy and curriculum for real hardware. It ships a
+              checkpoint small enough to run on a flight computer.
               <br />
               <br />
               Automata refines a terminal destination policy, reading synthetic
@@ -109,8 +108,8 @@ export const Research = () => {
               <br />
               Each aircraft in the Hyades fleet is an NDAA compliant quadcopter,
               with a prototype under development. The aircraft is designed to a
-              spec defined by the average Texas cloud seeding sortie. It
-              delivers a 1.5 kg reagent to 18,000 ft in a 40 minute mission.
+              spec defined by a typical cloud seeding sortie. It delivers a 1.5
+              kg reagent to 18,000 ft in a 40 minute mission.
               <br />
               <br />
               Petrichor develops an aircraft for $2800.

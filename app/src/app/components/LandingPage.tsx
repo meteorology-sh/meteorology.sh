@@ -10,7 +10,7 @@ export const LandingPage = () => {
       <section className="flex flex-col gap-12">
         <div>
           <h1 className="wordmark-hero">Petrichor</h1>
-          <p className="t-body-sm mt-4 text-ink-muted">the smell of rain</p>
+          <p className="t-body-md mt-4 text-ink-muted">the smell of rain</p>
         </div>
 
         <div className="grid h-24 grid-cols-4 gap-4" aria-hidden="true">
