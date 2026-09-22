@@ -5,5 +5,3 @@ services:
       dockerfile: Dockerfiles/Dockerfile.prod
     ports:
       - "5173:8080"
-    depends_on:
-      - server

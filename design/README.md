@@ -30,7 +30,7 @@ is why the generated CSS is written into `app/src/app/` rather than imported fro
 | Path | What |
 | --- | --- |
 | `brand.html` | The brand board. Commit it, open it from disk, send the file. |
-| `tokens.json` | Source of truth. Five colours, two families, scale, radii, don'ts. |
+| `tokens.json` | Source of truth. Five colours, two families, type scale, spacing, radii, don'ts. |
 | `build-tokens.mjs` | Generates the three CSS files above. |
 | `tokens.css` | Generated reference copy. Do not edit. |
 | `logos/` | The placeholder bolt mark, dark and light ground plus one colour. Iconography is still open. |
@@ -54,7 +54,28 @@ There are no status colours. Status belongs in a word.
 ## Two families
 
 Archivo for display and interface. IBM Plex Mono for every number a person acts on. Both
-SIL Open Font License 1.1, served from Google Fonts. No font binaries in this repo.
+SIL Open Font License 1.1. The site self-hosts the latin and latin-ext woff2 subsets from
+Google Fonts in `app/src/app/assets/fonts/`, with the licence text beside them, so the
+first paint does not wait on a third-party request. `app/src/app/fonts.css` declares them.
+
+## Type scale
+
+Every style in `tokens.json` becomes a `t-<name>` class in the generated `tokens.css`.
+
+| Class | Size / line | Job |
+| --- | --- | --- |
+| `t-display-xl` | 64 / 61 | The wordmark. One per page. |
+| `t-display-l` | 44 / 46 | The one statement at the top of a page. |
+| `t-display-m` | 28 / 32 | Section openers and record titles. |
+| `t-heading` | 20 / 26 | Panel and row headings. |
+| `t-subheading` | 13 / 18 | Group headers. Set in ink-muted. |
+| `t-body-md` | 17 / 24 | Taglines and lead lines under a display style. |
+| `t-body` | 15 / 22 | Running copy. Measure near 65 characters. |
+| `t-body-sm` | 13 / 19 | Captions and help text. |
+| `t-label` | 11 / 14 | Buttons, chips, axis labels. |
+| `t-data-l` | 22 / 26 | Mono. The single number a screen exists to show. |
+| `t-data` | 14 / 20 | Mono. Every value in a readout row. |
+| `t-coord` | 12 / 16 | Mono. Coordinates, tail numbers, record numbers. |
 
 ## Known gaps
 
