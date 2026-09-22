@@ -1,0 +1,237 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Mail for meteorology.sh. SES receives mail for one address, stores it in S3, and a
+  Lambda forwards it to a personal inbox. Replies go out through SES SMTP.
+
+Parameters:
+  Domain:
+    Type: String
+    Default: meteorology.sh
+  HostedZoneId:
+    Type: AWS::Route53::HostedZone::Id
+    Default: Z0202560SZO07XGZ5YOJ
+  Address:
+    Type: String
+    Description: Local part of the address that receives mail.
+  ForwardTo:
+    Type: String
+    Default: $NATHAN_EMAIL
+    Description: Inbox that receives the forwarded mail.
+
+Resources:
+  # Sending identity: Easy DKIM plus a custom MAIL FROM so SPF and DKIM both align.
+  DomainIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref Domain
+      MailFromAttributes:
+        MailFromDomain: !Sub mail.${Domain}
+        BehaviorOnMxFailure: USE_DEFAULT_VALUE
+
+  # Lets the forwarder deliver while the account is in the SES sandbox.
+  ForwardToIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref ForwardTo
+
+  MailRecords:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      RecordSets:
+        - Name: !Ref Domain
+          Type: MX
+          TTL: "300"
+          ResourceRecords: [!Sub "10 inbound-smtp.${AWS::Region}.amazonaws.com"]
+        - Name: !Sub mail.${Domain}
+          Type: MX
+          TTL: "300"
+          ResourceRecords:
+            [!Sub "10 feedback-smtp.${AWS::Region}.amazonses.com"]
+        - Name: !Sub mail.${Domain}
+          Type: TXT
+          TTL: "300"
+          ResourceRecords: ['"v=spf1 include:amazonses.com ~all"']
+        - Name: !Sub _dmarc.${Domain}
+          Type: TXT
+          TTL: "300"
+          ResourceRecords: ['"v=DMARC1; p=none;"']
+        - Name: !GetAtt DomainIdentity.DkimDNSTokenName1
+          Type: CNAME
+          TTL: "300"
+          ResourceRecords: [!GetAtt DomainIdentity.DkimDNSTokenValue1]
+        - Name: !GetAtt DomainIdentity.DkimDNSTokenName2
+          Type: CNAME
+          TTL: "300"
+          ResourceRecords: [!GetAtt DomainIdentity.DkimDNSTokenValue2]
+        - Name: !GetAtt DomainIdentity.DkimDNSTokenName3
+          Type: CNAME
+          TTL: "300"
+          ResourceRecords: [!GetAtt DomainIdentity.DkimDNSTokenValue3]
+
+  InboxBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-inbox
+            Status: Enabled
+            ExpirationInDays: 90
+
+  InboxBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref InboxBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: { Service: ses.amazonaws.com }
+            Action: s3:PutObject
+            Resource: !Sub ${InboxBucket.Arn}/*
+            Condition:
+              StringEquals: { "AWS:SourceAccount": !Ref AWS::AccountId }
+
+  ForwarderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: forward
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub ${InboxBucket.Arn}/*
+              - Effect: Allow
+                Action: ses:SendRawEmail
+                Resource: "*"
+
+  Forwarder:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: nodejs22.x
+      Handler: index.handler
+      Role: !GetAtt ForwarderRole.Arn
+      Timeout: 30
+      MemorySize: 512
+      Environment:
+        Variables:
+          BUCKET: !Ref InboxBucket
+          PREFIX: inbox/
+          # Gmail treats mail from one of your own send-as addresses as mail you sent,
+          # and replies to it from your default address. Forwards come from the forward address.
+          FROM: !Sub ${ForwardAddress}
+          SITE: !Ref Domain
+          TO: !Ref ForwardTo
+      Code:
+        ZipFile: |
+          const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
+          const { SESv2Client, SendEmailCommand } = require("@aws-sdk/client-sesv2");
+          const s3 = new S3Client();
+          const ses = new SESv2Client();
+          const { BUCKET, PREFIX, FROM, TO, SITE } = process.env;
+
+          // Headers that break or lie once the message is re-sent from our domain.
+          const DROP = /^(from|reply-to|sender|return-path|message-id|dkim-signature|domainkey-signature|arc-[\w-]+|authentication-results|received-spf|x-ses-[\w-]+)$/i;
+
+          exports.handler = async (event) => {
+            const { mail, receipt } = event.Records[0].ses;
+            if (receipt.spamVerdict.status === "FAIL" || receipt.virusVerdict.status === "FAIL") {
+              console.log("dropped", mail.messageId, receipt.spamVerdict.status, receipt.virusVerdict.status);
+              return;
+            }
+
+            const object = await s3.send(new GetObjectCommand({ Bucket: BUCKET, Key: PREFIX + mail.messageId }));
+            const raw = Buffer.from(await object.Body.transformToByteArray()).toString("latin1");
+            const split = raw.search(/\r?\n\r?\n/);
+            const headers = raw.slice(0, split).split(/\r?\n(?![ \t])/);
+            const body = raw.slice(split);
+
+            const header = (name) => {
+              const line = headers.find((h) => h.toLowerCase().startsWith(name + ":"));
+              return line && line.slice(name.length + 1).replace(/\r?\n[ \t]+/g, " ").trim();
+            };
+            const from = header("from") || mail.source;
+            const replyTo = header("reply-to") || from;
+            const name = (from.match(/^(.*?)\s*<[^>]*>\s*$/)?.[1] || from).replace(/^"|"$/g, "").trim();
+            const display = /=\?/.test(name) ? `${name} "via ${SITE}"` : `"${name.replace(/["\\]/g, "")} via ${SITE}"`;
+
+            const kept = headers.filter((h) => !DROP.test(h.slice(0, h.indexOf(":")).trim()));
+            kept.unshift(`From: ${display} <${FROM}>`, `Reply-To: ${replyTo}`);
+
+            await ses.send(new SendEmailCommand({
+              FromEmailAddress: FROM,
+              Destination: { ToAddresses: [TO] },
+              Content: { Raw: { Data: Buffer.from(kept.join("\r\n") + body, "latin1") } },
+            }));
+            console.log("forwarded", mail.messageId);
+          };
+
+  ForwarderPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Forwarder
+      Action: lambda:InvokeFunction
+      Principal: ses.amazonaws.com
+      SourceAccount: !Ref AWS::AccountId
+
+  RuleSet:
+    Type: AWS::SES::ReceiptRuleSet
+    Properties:
+      RuleSetName: meteorology-sh
+
+  ForwardRule:
+    Type: AWS::SES::ReceiptRule
+    DependsOn: [InboxBucketPolicy, ForwarderPermission]
+    Properties:
+      RuleSetName: !Ref RuleSet
+      Rule:
+        Name: forward
+        Enabled: true
+        ScanEnabled: true
+        TlsPolicy: Optional
+        Recipients: [!Sub "${Address}@${Domain}"]
+        Actions:
+          - S3Action:
+              BucketName: !Ref InboxBucket
+              ObjectKeyPrefix: inbox/
+          - LambdaAction:
+              FunctionArn: !GetAtt Forwarder.Arn
+              InvocationType: Event
+
+  # SMTP login for Gmail "Send mail as". It may only send as the one address.
+  SmtpUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: meteorology-sh-smtp
+      Policies:
+        - PolicyName: send-as
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action: ses:SendRawEmail
+                Resource: "*"
+                Condition:
+                  StringEquals:
+                    { "ses:FromAddress": !Sub "${Address}@${Domain}" }
+
+Outputs:
+  RuleSetName:
+    Value: !Ref RuleSet
+  InboxBucket:
+    Value: !Ref InboxBucket
+  SmtpUser:
+    Value: !Ref SmtpUser
