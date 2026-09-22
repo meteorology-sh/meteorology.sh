@@ -14,7 +14,7 @@ import { About } from "@/app/components/About";
 import { Research } from "@/app/components/Research";
 
 const home: PageMetaT = {
-  title: "Petrichor — Rain Enhancement",
+  title: "Petrichor — Make it Rain",
   description:
     "Petrichor is a small laboratory based in Austin, Texas. Petrichor develops cloud seeding technology for natural resource abundance in Texas.",
 };
