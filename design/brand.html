@@ -3,17 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petrichor — Brand Board</title>
+    <title>Petrichor — Brand</title>
     <link rel="icon" type="image/svg+xml" href="logos/bolt-dark.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=IBM+Plex+Mono:wght@400&display=swap"
-    />
 
     <!-- The board draws from the exact stylesheets the app ships, so the two cannot
-         diverge. Both are generated from design/tokens.json by design/build-tokens.mjs. -->
+         diverge. tokens.css is generated from design/tokens.json by
+         design/build-tokens.mjs. fonts.css loads the self-hosted font files. -->
+    <link rel="stylesheet" href="../app/src/app/fonts.css" />
     <link rel="stylesheet" href="../app/src/app/tokens.css" />
     <link rel="stylesheet" href="../app/src/app/App.css" />
 
@@ -30,6 +26,7 @@
         line-height: 22px;
         -webkit-font-smoothing: antialiased;
       }
+      h1, h2, h3, p { margin: 0; }
       .wrap { max-width: 1000px; margin-inline: auto; }
       header.masthead { padding-block: var(--space-10) var(--space-8); }
       section { margin-top: var(--space-10); }
@@ -43,6 +40,7 @@
       .accent { color: var(--accent); }
       .secondary { color: var(--secondary); }
       .measure { max-width: 62ch; }
+      .stack > * + * { margin-top: var(--space-4); }
       .grid { display: grid; gap: var(--space-4); }
       @media (min-width: 720px) {
         body { padding-inline: var(--space-8); }
@@ -51,14 +49,15 @@
         .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       }
       .panel { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-5); }
+      .scroll { overflow-x: auto; }
       table { width: 100%; border-collapse: collapse; }
       th { text-align: left; padding: var(--space-2) var(--space-3) var(--space-2) 0; border-bottom: 1px solid var(--hairline); }
       td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
       .swatch { height: 96px; border: 1px solid var(--hairline); }
+      .bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); height: 64px; }
+      .bar > span:first-child { grid-column: span 2; }
       .chipline { display: flex; align-items: center; gap: var(--space-3); }
       .chipdot { width: 20px; height: 20px; flex: none; border: 1px solid var(--hairline); }
-      .logocard { display: grid; gap: var(--space-3); padding: var(--space-5); border: 1px solid var(--hairline); }
-      .logocard.pick { border-color: var(--accent); }
       .logostage { display: flex; align-items: center; justify-content: center; height: 96px; background: var(--ground); }
       .rule { border: 0; border-top: 1px solid var(--hairline); margin: 0; }
       .btn-demo {
@@ -67,13 +66,20 @@
         border: 1px solid transparent; cursor: default;
       }
       .btn-primary-demo { background: var(--primary); color: var(--ink); border-color: var(--primary); }
-      .btn-default-demo { color: var(--ink); border-color: var(--border); }
+      .focus-demo { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .tab { padding-bottom: var(--space-1); border-bottom: 2px solid transparent; }
+      .tab.active { border-color: var(--primary); }
+      .dot { width: 8px; height: 8px; border-radius: var(--radius-selector); background: var(--ink-faint); }
+      .dot.live { background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+      .readout { background: var(--surface); border: 1px solid var(--hairline); padding: var(--space-5); }
+      .readout td { padding-inline: 0; }
+      .readout td:last-child { text-align: right; }
       .card-mock { width: 100%; max-width: 340px; aspect-ratio: 85.6 / 54; padding: var(--space-4); display: flex; flex-direction: column; justify-content: space-between; }
       .avatar-mock { width: 128px; height: 128px; display: flex; align-items: center; justify-content: center; }
       .browser { border: 1px solid var(--border); }
       .browserbar { display: flex; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--hairline); background: var(--surface-raised); }
       .browserdot { width: 8px; height: 8px; border-radius: 999px; background: var(--border); }
-      ol, ul { padding-left: 1.2em; }
+      ol, ul { padding-left: 1.2em; margin: 0; }
       li { margin-block: var(--space-2); }
       code { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
     </style>
@@ -88,90 +94,72 @@
           </svg>
           <span class="wordmark" style="font-size: 22px">Petrichor</span>
         </div>
-        <h1 class="wordmark-hero" style="margin: var(--space-8) 0 0">Brand board</h1>
-        <p class="t-body-sm muted" style="margin-top: var(--space-4)">
-          Rain enhancement, instrumented. Austin, Texas.
-        </p>
+        <h1 class="wordmark-hero" style="margin-top: var(--space-8)">Brand board</h1>
+        <p class="t-body-md muted" style="margin-top: var(--space-4)">the smell of rain</p>
+        <p class="t-coord faint" style="margin-top: var(--space-2)">AUSTIN, TEXAS · METEOROLOGY.SH</p>
       </header>
 
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Positioning</h2>
-          <span class="t-coord faint">ONE SENTENCE</span>
+          <span class="t-coord accent">ONE SENTENCE</span>
         </div>
         <p class="t-display-m measure">
-          For Texas water districts and ranchers, Petrichor is the rain enhancement
-          laboratory that measures every mission and publishes the data.
+          For scientists, Petrichor is the cloud seeding laboratory whose research serves
+          industrialists and conservationists alike.
         </p>
         <p class="t-body muted measure" style="margin-top: var(--space-5)">
-          Every decision on this board serves that sentence. The brand has to read as an
-          instrument a hydrologist will trust and a rancher will understand.
+          Every decision on this board serves that sentence. The audience is scientific.
+          The work serves industry and conservation in Texas.
         </p>
       </section>
 
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Direction</h2>
-          <span class="t-coord faint">THREE CONSIDERED, ONE CHOSEN</span>
+          <span class="t-coord accent">CHOSEN</span>
         </div>
-        <div class="grid cols-3">
-          <div class="panel">
-            <p class="t-label accent">Chosen</p>
-            <h3 class="t-heading" style="margin: var(--space-2) 0">Instrument-grade restraint</h3>
-            <p class="t-body-sm muted">
-              True black, dense telemetry type, monospace numerals. Reads as a research lab
-              that ships software. Matches the console the company already built.
-            </p>
-          </div>
-          <div class="panel">
-            <p class="t-label faint">Considered</p>
-            <h3 class="t-heading" style="margin: var(--space-2) 0">Texas frontier hardware</h3>
-            <p class="t-body-sm muted">
-              Derrick silhouettes, gold foil, WPA poster weight. Strong for a hardware
-              outfit. It undersells the software, which is the actual product.
-            </p>
-          </div>
-          <div class="panel">
-            <p class="t-label faint">Considered</p>
-            <h3 class="t-heading" style="margin: var(--space-2) 0">Editorial science</h3>
-            <p class="t-body-sm muted">
-              Serif, wide measures, journal layout. Good for the research series. It looks
-              like a publisher rather than an operator.
-            </p>
-          </div>
+        <div class="panel">
+          <h3 class="t-heading">Instrument-grade restraint</h3>
+          <p class="t-body muted measure" style="margin-top: var(--space-2)">
+            True black, dense type, and monospace numerals. The site looks and reads like
+            a scientific instrument.
+          </p>
         </div>
       </section>
 
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Colour</h2>
-          <span class="t-coord faint">FIVE COLOURS</span>
+          <span class="t-coord accent">FIVE COLOURS</span>
         </div>
         <div class="grid cols-4" style="margin-bottom: var(--space-5)">
-          <div><div class="swatch" style="background: var(--primary)"></div><p class="t-label secondary" style="margin: var(--space-2) 0 0">Primary</p><p class="t-coord muted">#365B4E</p></div>
-          <div><div class="swatch" style="background: var(--accent)"></div><p class="t-label secondary" style="margin: var(--space-2) 0 0">Accent</p><p class="t-coord muted">#74C9A0</p></div>
-          <div><div class="swatch" style="background: var(--secondary)"></div><p class="t-label secondary" style="margin: var(--space-2) 0 0">Secondary</p><p class="t-coord muted">#C8B78F</p></div>
-          <div><div class="swatch" style="background: var(--ink)"></div><p class="t-label secondary" style="margin: var(--space-2) 0 0">Ink</p><p class="t-coord muted">#ECF9FF</p></div>
+          <div><div class="swatch" style="background: var(--primary)"></div><p class="t-label secondary" style="margin-top: var(--space-2)">Primary</p><p class="t-coord muted">#365B4E</p></div>
+          <div><div class="swatch" style="background: var(--accent)"></div><p class="t-label secondary" style="margin-top: var(--space-2)">Accent</p><p class="t-coord muted">#74C9A0</p></div>
+          <div><div class="swatch" style="background: var(--secondary)"></div><p class="t-label secondary" style="margin-top: var(--space-2)">Secondary</p><p class="t-coord muted">#C8B78F</p></div>
+          <div><div class="swatch" style="background: var(--ink)"></div><p class="t-label secondary" style="margin-top: var(--space-2)">Ink</p><p class="t-coord muted">#ECF9FF</p></div>
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th class="t-label muted">Name</th><th class="t-label muted">Hex</th>
-              <th class="t-label muted">Role</th><th class="t-label muted">Job</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--ground)"></span>Ground</span></td><td class="t-coord">#000000</td><td class="t-body-sm muted">Neutral</td><td class="t-body-sm muted">The page. Also the text on a filled accent or secondary block.</td></tr>
-            <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--ink)"></span>Ink</span></td><td class="t-coord">#ECF9FF</td><td class="t-body-sm muted">Neutral</td><td class="t-body-sm muted">All primary text and numerals. 19.6:1 on ground.</td></tr>
-            <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--primary)"></span>Primary</span></td><td class="t-coord">#365B4E</td><td class="t-body-sm muted">Primary</td><td class="t-body-sm muted">The one most important fill on a page. Ink reads on it at 7.1:1.</td></tr>
-            <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--accent)"></span>Accent</span></td><td class="t-coord">#74C9A0</td><td class="t-body-sm muted">Accent</td><td class="t-body-sm muted">Links, the mark's band, the one value a decision turns on. 10.6:1 on ground.</td></tr>
-            <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--secondary)"></span>Secondary</span></td><td class="t-coord">#C8B78F</td><td class="t-body-sm muted">Secondary</td><td class="t-body-sm muted">Section labels, record numbers, print covers. 10.6:1 on ground.</td></tr>
-          </tbody>
-        </table>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="t-label muted">Name</th><th class="t-label muted">Hex</th>
+                <th class="t-label muted">Role</th><th class="t-label muted">Job</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--ground)"></span>Ground</span></td><td class="t-coord">#000000</td><td class="t-body-sm muted">Neutral</td><td class="t-body-sm muted">The page. Also the text on a filled accent or secondary block.</td></tr>
+              <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--ink)"></span>Ink</span></td><td class="t-coord">#ECF9FF</td><td class="t-body-sm muted">Neutral</td><td class="t-body-sm muted">All primary text and numerals. 19.6:1 on ground.</td></tr>
+              <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--primary)"></span>Primary</span></td><td class="t-coord">#365B4E</td><td class="t-body-sm muted">Primary</td><td class="t-body-sm muted">The one most important fill on a page: buttons and the active tab. Ink reads on it at 7.1:1.</td></tr>
+              <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--accent)"></span>Accent</span></td><td class="t-coord">#74C9A0</td><td class="t-body-sm muted">Accent</td><td class="t-body-sm muted">Links, the focus ring, the live status, and the first value in a readout. 10.6:1 on ground.</td></tr>
+              <tr><td class="t-body"><span class="chipline"><span class="chipdot" style="background: var(--secondary)"></span>Secondary</span></td><td class="t-coord">#C8B78F</td><td class="t-body-sm muted">Secondary</td><td class="t-body-sm muted">The mark, section labels, and print. 10.6:1 on ground.</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <p class="t-body muted measure" style="margin-top: var(--space-5)">
-          Surfaces, rules and muted inks are derived from ground and ink with
+          Surfaces, rules, and muted inks mix ground and ink with
           <code>color-mix(in srgb)</code>. The system holds five literal colours.
         </p>
         <div class="grid cols-3" style="margin-top: var(--space-4)">
@@ -182,67 +170,86 @@
           <p class="t-body-sm faint"><code>--ink-faint</code> ink 52%, 5.9:1</p>
           <p class="t-body-sm faint"><code>--ink-muted</code> ink 62%, 8.8:1</p>
         </div>
+
+        <p class="t-label secondary" style="margin: var(--space-8) 0 var(--space-3)">The colour bar</p>
+        <div class="bar" aria-hidden="true">
+          <span style="background: var(--primary)"></span>
+          <span style="background: var(--secondary)"></span>
+          <span style="background: var(--accent)"></span>
+        </div>
+        <p class="t-body-sm muted measure" style="margin-top: var(--space-3)">
+          The home page shows the three brand fills: primary at half width, secondary and
+          accent at a quarter each.
+        </p>
       </section>
 
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Typography</h2>
-          <span class="t-coord faint">TWO FAMILIES</span>
+          <span class="t-coord accent">TWO FAMILIES</span>
         </div>
         <div class="grid cols-2">
           <div class="panel">
             <p class="t-label secondary">Archivo</p>
             <p class="t-display-m" style="margin: var(--space-3) 0">Display and interface</p>
             <p class="t-body-sm muted">
-              A grotesque drawn for signage and documents. It holds up in uppercase at
-              0.1em tracking, which is how the wordmark is set.
+              A grotesque drawn for signage and documents. The wordmark sets it in
+              uppercase with wide tracking.
             </p>
             <p class="t-body-sm faint" style="margin-top: var(--space-3)">
-              SIL Open Font License 1.1. Served from Google Fonts.
+              SIL Open Font License 1.1. Self-hosted, variable 400–700.
             </p>
           </div>
           <div class="panel">
             <p class="t-label secondary">IBM Plex Mono</p>
-            <p class="t-data-l" style="margin: var(--space-3) 0">19,140–26,729 ft MSL</p>
+            <p class="t-data-l" style="margin: var(--space-3) 0">4,520 ft MSL</p>
             <p class="t-body-sm muted">
-              Every number a person acts on. Tabular figures line up a column of altitudes.
-              A reading a pilot acts on should look like a reading.
+              Numbers, coordinates, and status words. Tabular figures line up a column of
+              readings.
             </p>
             <p class="t-body-sm faint" style="margin-top: var(--space-3)">
-              SIL Open Font License 1.1. Served from Google Fonts.
+              SIL Open Font License 1.1. Self-hosted, 400.
             </p>
           </div>
         </div>
 
-        <table style="margin-top: var(--space-5)">
-          <thead>
-            <tr><th class="t-label muted">Style</th><th class="t-label muted">Spec</th><th class="t-label muted">Sample</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="t-coord">display-xl</td><td class="t-body-sm faint">64 / 61 · 700 · 0.1em · upper</td><td><span class="wordmark" style="font-size: 28px">Petrichor</span></td></tr>
-            <tr><td class="t-coord">display-l</td><td class="t-body-sm faint">44 / 46 · 600</td><td class="t-display-m">We fly the clouds that make rain.</td></tr>
-            <tr><td class="t-coord">display-m</td><td class="t-body-sm faint">28 / 32 · 600</td><td class="t-display-m">Warm-cloud hygroscopic seeding</td></tr>
-            <tr><td class="t-coord">heading</td><td class="t-body-sm faint">20 / 26 · 600</td><td class="t-heading">Environment</td></tr>
-            <tr><td class="t-coord">subheading</td><td class="t-body-sm faint">13 / 18 · 600 · 0.08em · upper</td><td class="t-subheading muted">Seeding band</td></tr>
-            <tr><td class="t-coord">body</td><td class="t-body-sm faint">15 / 22 · 400</td><td class="t-body">Petrichor operates from Austin under a Texas licence.</td></tr>
-            <tr><td class="t-coord">body-sm</td><td class="t-body-sm faint">13 / 19 · 400</td><td class="t-body-sm">Model run 12Z, valid 18Z to 00Z</td></tr>
-            <tr><td class="t-coord">label</td><td class="t-body-sm faint">11 / 14 · 600 · 0.1em · upper</td><td class="t-label">Aircraft</td></tr>
-            <tr><td class="t-coord">data-l</td><td class="t-body-sm faint">22 / 26 · mono</td><td class="t-data-l">10,481 ft MSL</td></tr>
-            <tr><td class="t-coord">data</td><td class="t-body-sm faint">14 / 20 · mono</td><td class="t-data">17,058 ft above freezing</td></tr>
-            <tr><td class="t-coord">coord</td><td class="t-body-sm faint">12 / 16 · mono · 0.06em</td><td class="t-coord">N30°16.03' W97°44.58'</td></tr>
-          </tbody>
-        </table>
+        <div class="scroll">
+          <table style="margin-top: var(--space-5)">
+            <thead>
+              <tr><th class="t-label muted">Style</th><th class="t-label muted">Spec</th><th class="t-label muted">Sample</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="t-coord">display-xl</td><td class="t-body-sm faint">64 / 61 · 700 · 0.1em · upper</td><td><span class="wordmark" style="font-size: 28px">Petrichor</span></td></tr>
+              <tr><td class="t-coord">display-l</td><td class="t-body-sm faint">44 / 46 · 600</td><td class="t-display-m">Rain enhancement research, for Texas storms</td></tr>
+              <tr><td class="t-coord">display-m</td><td class="t-body-sm faint">28 / 32 · 600</td><td class="t-display-m">Decision Science</td></tr>
+              <tr><td class="t-coord">heading</td><td class="t-body-sm faint">20 / 26 · 600</td><td class="t-heading">Austin, Texas</td></tr>
+              <tr><td class="t-coord">subheading</td><td class="t-body-sm faint">13 / 18 · 600 · 0.08em · upper</td><td class="t-subheading muted">Weatherman</td></tr>
+              <tr><td class="t-coord">body-md</td><td class="t-body-sm faint">17 / 24 · 400</td><td class="t-body-md muted">the smell of rain</td></tr>
+              <tr><td class="t-coord">body</td><td class="t-body-sm faint">15 / 22 · 400</td><td class="t-body">Petrichor is a small laboratory founded in Austin, Texas.</td></tr>
+              <tr><td class="t-coord">body-sm</td><td class="t-body-sm faint">13 / 19 · 400</td><td class="t-body-sm">A publication is forthcoming and under peer review.</td></tr>
+              <tr><td class="t-coord">label</td><td class="t-body-sm faint">11 / 14 · 600 · 0.1em · upper</td><td class="t-label">Research</td></tr>
+              <tr><td class="t-coord">data-l</td><td class="t-body-sm faint">22 / 26 · mono</td><td class="t-data-l">4,520 ft MSL</td></tr>
+              <tr><td class="t-coord">data</td><td class="t-body-sm faint">14 / 20 · mono</td><td class="t-data">36.2 <span class="faint">°C</span></td></tr>
+              <tr><td class="t-coord">coord</td><td class="t-body-sm faint">12 / 16 · mono · 0.06em</td><td class="t-coord">N30°16.03' W97°44.58'</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="t-body muted measure" style="margin-top: var(--space-5)">
+          The wordmark and the page statement scale with the screen. The hero wordmark
+          runs from 40 to 64px, and the statement runs from 26 to 44px with balanced line
+          breaks.
+        </p>
       </section>
 
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Mark</h2>
-          <span class="t-coord faint">PLACEHOLDER</span>
+          <span class="t-coord accent">PLACEHOLDER</span>
         </div>
         <div class="panel">
           <div class="grid cols-4" style="align-items: center">
             <div>
-              <div class="logostage" style="height: 96px">
+              <div class="logostage">
                 <svg viewBox="0 0 32 32" width="56" height="56" role="img" aria-label="Petrichor">
                   <path class="mark" d="M18.5 2 L6.5 18.5 H13.5 L12 30 L25.5 12.5 H18 Z"/>
                 </svg>
@@ -250,41 +257,91 @@
               <p class="t-body-sm faint" style="margin-top: var(--space-2)">56px</p>
             </div>
             <div>
-              <div class="logostage" style="height: 96px; background: var(--ink)">
-                <img src="logos/bolt-light.svg" width="32" height="32" alt="Mark inverted" />
+              <div class="logostage" style="background: var(--ink)">
+                <img src="logos/bolt-light.svg" width="32" height="32" alt="the mark inverted on ink" />
               </div>
               <p class="t-body-sm faint" style="margin-top: var(--space-2)">Inverted</p>
             </div>
             <div>
-              <div class="logostage" style="height: 96px">
-                <img src="logos/bolt-dark.svg" width="24" height="24" alt="Mark at 24 pixels" />
+              <div class="logostage">
+                <img src="logos/bolt-dark.svg" width="24" height="24" alt="the mark at 24 pixels" />
               </div>
               <p class="t-body-sm faint" style="margin-top: var(--space-2)">24px favicon</p>
             </div>
             <div>
-              <div class="logostage" style="height: 96px">
-                <img src="logos/bolt-mono.svg" width="16" height="16" alt="Mark at 16 pixels" />
+              <div class="logostage">
+                <img src="logos/bolt-mono.svg" width="16" height="16" alt="the mark at 16 pixels in one colour" />
               </div>
               <p class="t-body-sm faint" style="margin-top: var(--space-2)">16px, one colour</p>
             </div>
           </div>
         </div>
         <p class="t-body muted measure" style="margin-top: var(--space-5)">
-          A filled bolt in secondary, holding the position until we work through
-          iconography properly. The <code>brand</code> skill asks for three to five drawn
-          concepts with rationales. That pass is deferred by decision, not skipped.
+          A filled bolt in secondary is the placeholder mark. Drawn concepts come later.
         </p>
         <p class="t-body muted measure" style="margin-top: var(--space-4)">
-          There is no outlined wordmark file. PETRICHOR is set live in Archivo 700 at
-          0.14em tracking. Commission a drawn logotype before print, vinyl or aircraft
-          livery.
+          PETRICHOR is set live in Archivo 700 at 0.14em tracking. Commission a drawn
+          logotype before print, vinyl, or aircraft livery.
         </p>
       </section>
 
       <section>
         <div class="sechead">
+          <h2 class="t-subheading muted">Interface</h2>
+          <span class="t-coord accent">FROM THE SITE</span>
+        </div>
+        <div class="grid cols-2">
+          <div class="readout">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-3); border-bottom: 1px solid var(--hairline)">
+              <div style="display: flex; align-items: center; gap: var(--space-3)">
+                <h3 class="t-heading">Austin, Texas</h3>
+                <span style="display: flex; align-items: center; gap: var(--space-2)">
+                  <span class="dot live" aria-hidden="true"></span>
+                  <span class="t-coord muted">LIVE</span>
+                </span>
+              </div>
+              <span class="t-coord muted">N30°16.03' W97°44.58'</span>
+            </div>
+            <table>
+              <tbody>
+                <tr><td class="t-body muted">temperature</td><td class="t-data accent">36.2 <span class="faint">°C</span></td></tr>
+                <tr><td class="t-body muted">wind</td><td class="t-data">150° 7 <span class="faint">kt</span></td></tr>
+                <tr><td class="t-body muted">precipitation</td><td class="t-data">0.00 <span class="faint">in</span></td></tr>
+                <tr><td class="t-body muted">cloud cover</td><td class="t-data">100 <span class="faint">%</span></td></tr>
+                <tr><td class="t-body muted">zero degree isotherm</td><td class="t-data">4,520 <span class="faint">ft MSL</span></td></tr>
+                <tr><td class="t-body muted">convective available potential energy</td><td class="t-data">1,250 <span class="faint">J/kg</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="stack">
+            <p class="t-label secondary">The readout</p>
+            <ul class="t-body-sm muted">
+              <li>Labels are lowercase and spelled out in full.</li>
+              <li>Values are mono. Units follow in ink-faint.</li>
+              <li>The first value is set in accent.</li>
+              <li>Wind reads the way a METAR carries it: three digits, nearest ten degrees.</li>
+              <li>Before data arrives, each value shows an em dash and the status reads WAITING.</li>
+            </ul>
+            <p class="t-label secondary">Controls</p>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5)">
+              <span class="btn-demo btn-primary-demo t-label">About</span>
+              <span class="btn-demo btn-primary-demo t-label focus-demo">Research</span>
+              <span class="t-label tab active">Home</span>
+              <span class="t-label tab">About</span>
+            </div>
+            <ul class="t-body-sm muted">
+              <li>Buttons are primary fills with ink labels and a 2px radius.</li>
+              <li>The active tab carries a primary underline.</li>
+              <li>Every focusable element shows a 2px accent ring, offset 2px.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sechead">
           <h2 class="t-subheading muted">Mockups</h2>
-          <span class="t-coord faint">SITE · CARD · AVATAR</span>
+          <span class="t-coord accent">SITE · CARD · AVATAR</span>
         </div>
 
         <div class="browser">
@@ -293,24 +350,37 @@
             <span class="t-coord faint" style="margin-left: var(--space-3)">meteorology.sh</span>
           </div>
           <div style="padding: var(--space-5)">
-            <div style="display: flex; align-items: center; gap: var(--space-3); padding-bottom: var(--space-5); border-bottom: 1px solid var(--hairline)">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--hairline)">
               <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
                 <path class="mark" d="M18.5 2 L6.5 18.5 H13.5 L12 30 L25.5 12.5 H18 Z"/>
               </svg>
               <span class="wordmark" style="font-size: 14px">Petrichor</span>
               <span style="flex: 1"></span>
-              <span class="t-label muted">Home</span><span class="t-label muted">About</span>
+              <span class="t-label tab active">Home</span>
+              <span class="t-label tab">About</span>
+              <span class="t-label tab">Research</span>
             </div>
-            <div style="padding-block: var(--space-8)">
-              <h3 class="statement" style="margin: 0; max-width: 18ch">We fly the clouds that make rain.</h3>
-              <p class="t-body muted measure" style="margin-top: var(--space-4)">
-                Petrichor is a rain enhancement laboratory in Austin, Texas. We build
-                unmanned aircraft. We write the software that picks the targets.
-              </p>
-              <div style="display: flex; gap: var(--space-3); margin-top: var(--space-5)">
-                <span class="btn-demo btn-primary-demo t-label">Read the research</span>
-                <span class="btn-demo btn-default-demo t-label">Talk to us</span>
+            <div style="padding-block: var(--space-8)" class="stack">
+              <h3 class="wordmark-hero">Petrichor</h3>
+              <p class="t-body-md muted">the smell of rain</p>
+              <div class="bar" style="height: 48px; margin-top: var(--space-6)" aria-hidden="true">
+                <span style="background: var(--primary)"></span>
+                <span style="background: var(--secondary)"></span>
+                <span style="background: var(--accent)"></span>
               </div>
+              <p class="statement" style="margin-top: var(--space-6)">Rain enhancement research, for Texas storms</p>
+              <p class="t-body muted measure">
+                Petrichor is a small laboratory founded in Austin, Texas. We develop
+                research in open source software and aeronautics for meteorologists.
+              </p>
+              <div style="display: flex; gap: var(--space-3)">
+                <span class="btn-demo btn-primary-demo t-label">About</span>
+                <span class="btn-demo btn-primary-demo t-label">Research</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2); padding-top: var(--space-4); border-top: 1px solid var(--hairline)">
+              <span class="t-body-sm faint">Petrichor</span>
+              <span class="t-coord faint">AUSTIN, TEXAS · METEOROLOGY.SH</span>
             </div>
           </div>
         </div>
@@ -326,8 +396,8 @@
                 <span class="wordmark" style="font-size: 12px">Petrichor</span>
               </div>
               <div>
-                <p class="t-body" style="margin: 0">Founder</p>
-                <p class="t-body-sm muted" style="margin: 0">Rain enhancement laboratory</p>
+                <p class="t-body">Founder</p>
+                <p class="t-body-sm muted">Rain enhancement research</p>
                 <p class="t-coord faint" style="margin-top: var(--space-2)">
                   hello@meteorology.sh · AUSTIN, TEXAS
                 </p>
@@ -337,10 +407,10 @@
           <div>
             <p class="t-label secondary" style="margin-bottom: var(--space-3)">Social avatar · 400 × 400</p>
             <div class="avatar-mock" style="background: var(--primary)">
-              <img src="logos/bolt-mono.svg" width="64" height="64" alt="Petrichor avatar" />
+              <img src="logos/bolt-mono.svg" width="64" height="64" alt="the Petrichor avatar, the mark on primary" />
             </div>
             <p class="t-body-sm faint" style="margin-top: var(--space-3)">
-              Mono mark on primary. The only lockup that survives a 32px circle crop.
+              The one-colour mark on primary. It reads in a 32px circle crop.
             </p>
           </div>
         </div>
@@ -349,52 +419,76 @@
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Voice</h2>
-          <span class="t-coord faint">HOW WE WRITE</span>
+          <span class="t-coord accent">HOW WE WRITE</span>
         </div>
-        <div class="grid cols-2">
+        <ol class="t-body measure">
+          <li>Prefer the simple, short explanation with minimal jargon.</li>
+          <li>Use direct, affirmative sentences.</li>
+          <li>Skip sentences that set up an idea and then negate or expand it.</li>
+          <li>Skip hedging and equivocation.</li>
+        </ol>
+
+        <div class="grid cols-2" style="margin-top: var(--space-5)">
           <div class="panel">
             <p class="t-label accent">On brand</p>
             <ul class="t-body-sm muted">
-              <li>Across 41 randomised cases over the Edwards Plateau, seeded cells produced a mean rain volume 14% above control (95% CI: 2–27%).</li>
-              <li>Cleared for launch. Seeding band 19,140–26,729 ft MSL. Window closes 04:12Z.</li>
-              <li>We fly the clouds that make rain.</li>
+              <li>A cloud is seeded by various materials in the form of crystalline dust, which nucleate supercooled liquid water and precipitate from the sky.</li>
+              <li>It delivers a 1.5 kg reagent to 18,000 ft in a 40 minute mission.</li>
+              <li>Weatherman collates metadata from a combination of NOAA data sources, including national radar mosaics, satellites, and advanced models.</li>
             </ul>
           </div>
           <div class="panel">
             <p class="t-label secondary">Off brand</p>
             <ul class="t-body-sm faint">
               <li>Petrichor is revolutionising the future of weather.</li>
-              <li>Our AI-powered platform unlocks unprecedented rainfall.</li>
-              <li>Seeding works. <span class="faint">(no number, no interval, no source)</span></li>
+              <li>This is more than weather software. It is a new way to think about rain.</li>
+              <li>Seeding may, in some conditions, potentially help increase rainfall.</li>
+              <li>CAPE 1,250 · FZL 4.5 kft</li>
             </ul>
           </div>
         </div>
+
+        <p class="t-label secondary" style="margin: var(--space-8) 0 var(--space-3)">Interface copy</p>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr><th class="t-label muted">Where</th><th class="t-label muted">Rule</th><th class="t-label muted">Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="t-body">Page titles</td><td class="t-body-sm muted">The brand, an em dash, then the page.</td><td class="t-body-sm">Petrichor — Research</td></tr>
+              <tr><td class="t-body">Taglines</td><td class="t-body-sm muted">Lowercase, set in body-md.</td><td class="t-body-sm">the smell of rain</td></tr>
+              <tr><td class="t-body">Section tags</td><td class="t-body-sm muted">One or two uppercase words in accent mono.</td><td class="t-coord accent">DRONES</td></tr>
+              <tr><td class="t-body">Status</td><td class="t-body-sm muted">One uppercase word.</td><td class="t-coord">LIVE · WAITING</td></tr>
+              <tr><td class="t-body">Readout labels</td><td class="t-body-sm muted">Lowercase and spelled out.</td><td class="t-body-sm">zero degree isotherm</td></tr>
+              <tr><td class="t-body">Missing values</td><td class="t-body-sm muted">An em dash.</td><td class="t-data">— <span class="faint">°C</span></td></tr>
+              <tr><td class="t-body">Image text</td><td class="t-body-sm muted">Lowercase. Describe what the picture shows.</td><td class="t-body-sm">a hyades quadcopter render</td></tr>
+            </tbody>
+          </table>
+        </div>
         <p class="t-body muted measure" style="margin-top: var(--space-5)">
-          Lead with the measurement. Name the uncertainty in the same sentence as the
-          result. Write short, affirmative sentences. Full rules live in
-          <code>.claude/skills/voice/SKILL.md</code>.
+          The full rules live in <code>.claude/skills/voice/SKILL.md</code>.
         </p>
       </section>
 
       <section>
         <div class="sechead">
           <h2 class="t-subheading muted">Don'ts</h2>
-          <span class="t-coord faint">THREE</span>
+          <span class="t-coord accent">THREE</span>
         </div>
         <ol class="t-body measure">
           <li>Do not set primary as text. It reads at 2.8:1 on ground. Use accent.</li>
-          <li>Do not add a sixth colour. Status belongs in a word, not a hue.</li>
+          <li>Do not add a sixth colour. Name a state with a word, like LIVE or WAITING.</li>
           <li>Do not round a panel. Only status pills take a radius.</li>
         </ol>
       </section>
 
       <hr class="rule" style="margin-top: var(--space-10)" />
       <p class="t-body-sm faint" style="margin-top: var(--space-5)">
-        This board links <code>../app/src/app/tokens.css</code> and
-        <code>../app/src/app/App.css</code> directly. Both are generated from
-        <code>design/tokens.json</code> by <code>design/build-tokens.mjs</code>, so the
-        board and the running site always show the same values. Open this file from disk or
-        serve the repo root.
+        This board links <code>../app/src/app/fonts.css</code>,
+        <code>../app/src/app/tokens.css</code>, and <code>../app/src/app/App.css</code>
+        directly. <code>tokens.css</code> is generated from <code>design/tokens.json</code>
+        by <code>design/build-tokens.mjs</code>, so the board and the site show the same
+        values. Open this file from disk or serve the repo root.
       </p>
     </div>
   </body>

@@ -3,7 +3,8 @@
 Company branding. Weatherman is a separate product with its own identity.
 
 Open **`design/brand.html`** in a browser. That is the brand board: positioning, the five
-colours, the type pairing, four logo concepts, mockups, voice, and the don'ts.
+colours, the type scale, the placeholder mark, interface patterns from the site, mockups,
+voice, and the don'ts.
 
 ## The rule that keeps this honest
 
@@ -18,8 +19,8 @@ design/tokens.json                 source of truth
        └─ app/src/app/theme.css    Tailwind @theme + both daisyUI themes
 ```
 
-`design/brand.html` links `../app/src/app/tokens.css` and `../app/src/app/App.css`
-directly. The board renders with the exact stylesheets the site ships, so a colour cannot
+`design/brand.html` links `../app/src/app/fonts.css`, `../app/src/app/tokens.css`, and
+`../app/src/app/App.css` directly. The board renders with the exact stylesheets the site ships, so a colour cannot
 drift between the two. Change `tokens.json`, run the script, and both update together.
 
 The Docker build context is `./app` and the dev bind mount is `./app:/usr/src/app`, which
@@ -41,9 +42,9 @@ is why the generated CSS is written into `app/src/app/` rather than imported fro
 | --- | --- | --- | --- |
 | `ground` | `#000000` | `#f4f2ed` | The page. Also text on a filled accent or secondary block. |
 | `ink` | `#ecf9ff` | `#10130f` | All primary text and numerals. |
-| `primary` | `#365b4e` | `#2c4c41` | The one most important fill on a page. |
-| `accent` | `#74c9a0` | `#1a6044` | Links, the mark's band, the value a decision turns on. |
-| `secondary` | `#c8b78f` | `#756739` | Section labels, record numbers, print. |
+| `primary` | `#365b4e` | `#2c4c41` | The one most important fill on a page: buttons and the active tab. |
+| `accent` | `#74c9a0` | `#1a6044` | Links, the focus ring, the live status, the first value in a readout. |
+| `secondary` | `#c8b78f` | `#756739` | The mark, section labels, print. |
 
 Surfaces, rules and muted inks derive from `ground` and `ink` with `color-mix(in srgb)` at
 ratios set per theme. Every pair clears its floor: 4.5:1 for text, 3:1 for borders and the
