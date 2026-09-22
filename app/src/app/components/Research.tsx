@@ -25,9 +25,9 @@ export const Research = () => {
             <h3 className="t-heading">Decision Science</h3>
             <p className="t-body max-w-[62ch] text-ink-muted">
               Weatherman is a decision science platform. It reads meteorological
-              timeseries data and stacks spatial layers on a map. These data
-              highlight cloud formations whose physics are optimal candidates
-              for cloud seeding.
+              data and stacks spatial layers on a map. These data highlight
+              cloud formations whose physics are optimal candidates for cloud
+              seeding.
               <br />
               <br />
               Weatherman collates metadata from a combination of NOAA data
