@@ -15,8 +15,7 @@ Parameters:
     Description: Local part of the address that receives mail.
   ForwardTo:
     Type: String
-    Default: $NATHAN_EMAIL
-    Description: Inbox that receives the forwarded mail.
+    Description: Inbox that receives the forwarded mail. mail.sh passes it from infra/.env.
 
 Resources:
   # Sending identity: Easy DKIM plus a custom MAIL FROM so SPF and DKIM both align.

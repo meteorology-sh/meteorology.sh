@@ -14,14 +14,21 @@ SMTP_USER=meteorology-sh-smtp
 PARAM=/meteorology-sh/smtp
 DIR=$(cd "$(dirname "$0")" && pwd)
 
+# The inbox that receives the forwarded mail. It stays out of git: put
+# NATHAN_EMAIL=the inbox in infra/.env, or set it in the environment.
+[ -f "$DIR/.env" ] && . "$DIR/.env"
+
 output() {
   aws cloudformation describe-stacks --region "$REGION" --stack-name "$STACK" \
     --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text
 }
 
 deploy() {
+  : "${NATHAN_EMAIL:?set NATHAN_EMAIL in infra/.env — the inbox that receives the mail}"
+
   aws cloudformation deploy --region "$REGION" --stack-name "$STACK" \
-    --template-file "$DIR/mail.yaml" --capabilities CAPABILITY_NAMED_IAM
+    --template-file "$DIR/mail.yaml" --capabilities CAPABILITY_NAMED_IAM \
+    --parameter-overrides "ForwardTo=$NATHAN_EMAIL"
 
   aws ses set-active-receipt-rule-set --region "$REGION" --rule-set-name "$(output RuleSetName)"
 

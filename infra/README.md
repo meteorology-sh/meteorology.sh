@@ -19,5 +19,8 @@ infra/mail.sh smtp      # make an SMTP login and store it in SSM Parameter Store
 infra/mail.sh sandbox   # ask AWS to lift the SES sandbox so replies reach anyone
 ```
 
+`deploy` needs the inbox that receives the mail. It stays out of git: put
+`NATHAN_EMAIL=the inbox` in `infra/.env`, which is ignored.
+
 The root TXT record also holds Google site verification, so `mail.sh` writes it and the
 stack leaves it alone.
