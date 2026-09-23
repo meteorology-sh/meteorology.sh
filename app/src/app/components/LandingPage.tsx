@@ -20,9 +20,7 @@ export const LandingPage = () => {
         </div>
 
         <div className="flex flex-col gap-6">
-          <h2 className="statement">
-            Rain enhancement research, for Texas storms
-          </h2>
+          <h2 className="statement">Rain as a Service</h2>
           <p className="t-body min-w-1/2 text-ink-muted">
             Petrichor is a small laboratory founded in Austin, Texas. We develop
             research in open source software and aeronautics for meteorologists.
