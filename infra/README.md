@@ -16,7 +16,6 @@ bucket, the forwarder, the receipt rule, and the SMTP user. `mail.sh` wraps it:
 ```bash
 infra/mail.sh deploy    # create or update the stack, activate the rule set, publish root SPF
 infra/mail.sh smtp      # make an SMTP login and store it in SSM Parameter Store
-infra/mail.sh sandbox   # ask AWS to lift the SES sandbox so replies reach anyone
 ```
 
 `deploy` needs the inbox that receives the mail. It stays out of git: put

@@ -3,7 +3,6 @@
 #
 #   infra/mail.sh deploy    create or update the stack, activate the rule set, publish root SPF
 #   infra/mail.sh smtp      make an SMTP login for Gmail and store it in SSM Parameter Store
-#   infra/mail.sh sandbox   ask AWS to lift the SES sandbox so replies reach anyone
 set -euo pipefail
 
 REGION=us-east-1
@@ -62,17 +61,7 @@ smtp() {
   echo "SMTP login stored in SSM Parameter Store ($REGION): $PARAM/username and $PARAM/password"
 }
 
-sandbox() {
-  aws sesv2 put-account-details --region "$REGION" \
-    --mail-type TRANSACTIONAL \
-    --website-url "https://$DOMAIN" \
-    --contact-language EN \
-    --use-case-description "Personal correspondence for one address, the lab address, at a small research lab. Mail is sent by hand from Gmail through SES SMTP, only to people who wrote first or whom we contact directly. No lists, no marketing, no bulk sending. Bounces and complaints are watched in the SES console." \
-    --production-access-enabled
-  echo "Request sent. AWS usually answers within a day by email."
-}
-
 case "${1:-}" in
-  deploy|smtp|sandbox) "$1" ;;
-  *) echo "usage: infra/mail.sh deploy|smtp|sandbox" >&2; exit 1 ;;
+  deploy|smtp) "$1" ;;
+  *) echo "usage: infra/mail.sh deploy|smtp" >&2; exit 1 ;;
 esac
