@@ -2,7 +2,7 @@ import { expect, isNarrow, test } from "./fixtures";
 
 const routes = [
   { path: "/", heading: "Petrichor", title: "Petrichor — Make it Rain" },
-  { path: "/about", heading: "meteorology.sh", title: "Petrichor — About" },
+  { path: "/about", heading: "Rain as a Service", title: "Petrichor — About" },
   { path: "/research", heading: "Research", title: "Petrichor — Research" },
   { path: "/contact", heading: "Contact", title: "Petrichor — Contact" },
 ];

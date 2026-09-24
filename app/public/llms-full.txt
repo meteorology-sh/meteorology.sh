@@ -28,9 +28,11 @@ The home page shows live weather conditions over Austin (N30 16.03' W97 44.58') 
 
 URL: https://meteorology.sh/about
 
-## meteorology.sh
+## Rain as a Service
 
-Petrichor is a small laboratory working towards the benefit of natural resources in the state of Texas.
+Petrichor is a boutique research laboratory prototyping cloud seeding technologies.
+
+Based in Austin, TX.
 
 ## The lab
 

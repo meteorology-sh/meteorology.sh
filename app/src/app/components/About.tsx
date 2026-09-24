@@ -21,11 +21,14 @@ export const About = () => {
     <>
       <section className="flex flex-col gap-6">
         <h1 className="statement">
-          meteorology<span className="text-accent">.sh</span>
+          <span className="text-accent">Rain</span> as a Service
         </h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
-          Petrichor is a small laboratory working towards the benefit of natural
-          resources in the state of Texas.
+          Petrichor is a boutique research laboratory prototyping cloud seeding
+          technologies.
+          <br />
+          <br />
+          Based in Austin, TX.
         </p>
       </section>
 
