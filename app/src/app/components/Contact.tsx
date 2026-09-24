@@ -71,8 +71,8 @@ export const Contact = () => {
       <section className="flex flex-col gap-6">
         <h1 className="statement">Contact</h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
-          Please reach out with questions about rain enhancement and natural
-          resources in Texas.
+          Contact Petrichor for research and business inquiries. Follow on
+          social media or send an email.
         </p>
       </section>
 
