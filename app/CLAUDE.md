@@ -41,7 +41,7 @@ app/
         Conditions.tsx     # Live conditions card for Austin
         About.tsx          # Who / What / Why list
         Research.tsx       # Weatherman, Automata, Hyades sections
-        Contact.tsx        # Contact card with the X link
+        Contact.tsx        # Two channel cards: the X account and hello@
       assets/              # Images + self-hosted woff2 fonts (with OFL licences)
       index.css            # Global entry: fonts, Tailwind, tokens, theme, base layer
       fonts.css            # @font-face for Archivo and IBM Plex Mono

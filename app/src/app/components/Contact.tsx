@@ -1,4 +1,5 @@
-const X = "https://x.com/meteorologyxsh";
+// React
+import type { ReactElement } from "react";
 
 const XMark = () => (
   <svg
@@ -12,40 +13,96 @@ const XMark = () => (
   </svg>
 );
 
+/* Drawn square to match the menu icon in the header. */
+const Envelope = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width={16}
+    height={16}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.75}
+    strokeLinecap="square"
+    strokeLinejoin="miter"
+    aria-hidden="true"
+  >
+    <path d="M2.75 5.25h18.5v13.5H2.75z" />
+    <path d="m2.75 5.25 9.25 7.5 9.25-7.5" />
+  </svg>
+);
+
+type ChannelT = {
+  tag: string;
+  title: string;
+  body: string;
+  href: string;
+  action: string;
+  label: string;
+  external: boolean;
+  icon: ReactElement;
+};
+
+const channels: ChannelT[] = [
+  {
+    tag: "X",
+    title: "Follow the lab",
+    body: "Flight reports, storm days, and the state of the research.",
+    href: "https://x.com/meteorologyxsh",
+    action: "@meteorologyxsh",
+    label: "Petrichor on X",
+    external: true,
+    icon: <XMark />,
+  },
+  {
+    tag: "EMAIL",
+    title: "Write to the lab",
+    body: "Questions about the research, and the work across Texas.",
+    href: "mailto:hello@meteorology.sh",
+    action: "hello@meteorology.sh",
+    label: "Email Petrichor",
+    external: false,
+    icon: <Envelope />,
+  },
+];
+
 export const Contact = () => {
   return (
     <>
       <section className="flex flex-col gap-6">
         <h1 className="statement">Contact</h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
-          Petrichor works from Austin, Texas. The lab posts its research on X.
+          Petrichor works from Austin, Texas. Write to the lab, or follow the
+          research on X.
         </p>
       </section>
 
-      <section className="mt-16">
-        <div className="card max-w-md border border-hairline bg-base-200">
-          <div className="card-body gap-6">
-            <div className="flex items-baseline justify-between gap-4">
-              <h2 className="t-heading">Follow the lab</h2>
-              <span className="t-coord text-accent">X</span>
-            </div>
-            <p className="t-body text-ink-muted">
-              Flight reports, storm days, and the state of the research.
-            </p>
-            <div className="card-actions">
-              <a
-                href={X}
-                target="_blank"
-                rel="noreferrer"
-                className="btn gap-2"
-                aria-label="Petrichor on X"
-              >
-                <XMark />
-                @meteorologyxsh
-              </a>
+      <section className="mt-16 grid max-w-3xl gap-6 md:grid-cols-2">
+        {channels.map((channel) => (
+          <div
+            key={channel.tag}
+            className="card border border-hairline bg-base-200"
+          >
+            <div className="card-body gap-6">
+              <div className="flex items-baseline justify-between gap-4">
+                <h2 className="t-heading">{channel.title}</h2>
+                <span className="t-coord text-accent">{channel.tag}</span>
+              </div>
+              <p className="t-body text-ink-muted">{channel.body}</p>
+              <div className="card-actions mt-auto">
+                <a
+                  href={channel.href}
+                  target={channel.external ? "_blank" : undefined}
+                  rel={channel.external ? "noreferrer" : undefined}
+                  className="btn gap-2"
+                  aria-label={channel.label}
+                >
+                  {channel.icon}
+                  {channel.action}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </section>
     </>
   );

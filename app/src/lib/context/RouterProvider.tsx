@@ -35,7 +35,7 @@ const research: PageMetaT = {
 const contact: PageMetaT = {
   title: "Petrichor — Contact",
   description:
-    "Petrichor works from Austin, Texas. The lab posts its research on X.",
+    "Write to Petrichor at hello@meteorology.sh, or follow the research on X. The lab works from Austin, Texas.",
 };
 
 const router = createBrowserRouter([
