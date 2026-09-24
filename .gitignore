@@ -1,2 +1,7 @@
 .codegraph
 infra/.env
+
+# Generated brand assets. design/artifacts/build.mjs rebuilds them.
+design/artifacts/avatars/
+design/artifacts/headers/
+design/artifacts/svg/

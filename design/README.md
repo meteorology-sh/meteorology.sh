@@ -35,6 +35,7 @@ is why the generated CSS is written into `app/src/app/` rather than imported fro
 | `build-tokens.mjs` | Generates the three CSS files above. |
 | `tokens.css` | Generated reference copy. Do not edit. |
 | `logos/` | The placeholder bolt mark, dark and light ground plus one colour. Iconography is still open. |
+| `artifacts/` | Profile pictures and social headers. Generated and gitignored; run `node design/artifacts/build.mjs`. |
 
 ## Five colours
 

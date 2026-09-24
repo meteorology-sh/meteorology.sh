@@ -45,8 +45,8 @@ type ChannelT = {
 const channels: ChannelT[] = [
   {
     tag: "X",
-    title: "Follow the lab",
-    body: "Flight reports, storm days, and the state of the research.",
+    title: "Follow",
+    body: "Articles and Updates",
     href: "https://x.com/meteorologyxsh",
     action: "@meteorologyxsh",
     label: "Petrichor on X",
@@ -55,8 +55,8 @@ const channels: ChannelT[] = [
   },
   {
     tag: "EMAIL",
-    title: "Write to the lab",
-    body: "Questions about the research, and the work across Texas.",
+    title: "Write",
+    body: "Business Development and Communications",
     href: "mailto:hello@meteorology.sh",
     action: "hello@meteorology.sh",
     label: "Email Petrichor",
@@ -71,8 +71,8 @@ export const Contact = () => {
       <section className="flex flex-col gap-6">
         <h1 className="statement">Contact</h1>
         <p className="t-body max-w-[62ch] text-ink-muted">
-          Petrichor works from Austin, Texas. Write to the lab, or follow the
-          research on X.
+          Please reach out with questions about rain enhancement and natural
+          resources in Texas.
         </p>
       </section>
 
