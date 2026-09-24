@@ -7,13 +7,14 @@ on cloud seeding for rain enhancement across Texas. The lab builds open source s
 neural networks, and quadcopter drones. The site is live at
 [meteorology.sh](https://meteorology.sh).
 
-The site is a static React SPA with three pages:
+The site is a static React SPA with four pages:
 
 | Route | Page | Content |
 | --- | --- | --- |
 | `/` | `LandingPage` | Wordmark, mission statement, and a live conditions card for Austin (Open-Meteo). |
 | `/about` | `About` | Who, what, and why: the engineers, cloud seeding, and Texas water resources. |
 | `/research` | `Research` | The three research products: **Weatherman** (decision science software), **Automata** (reinforcement learning harness), **Hyades** (quadcopter drones). |
+| `/contact` | `Contact` | A card with the link to the lab's X account. |
 
 Weatherman is a separate product with its own identity. This site carries the Petrichor
 brand only.

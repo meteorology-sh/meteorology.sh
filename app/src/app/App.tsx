@@ -31,6 +31,7 @@ const routes = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/research", label: "Research" },
+  { to: "/contact", label: "Contact" },
 ];
 
 // The active tab carries a primary underline. daisyUI's menu has no such

@@ -14,7 +14,7 @@ URL: https://meteorology.sh/
 
 the smell of rain
 
-## Rain enhancement research, for Texas storms
+## Rain as a Service
 
 Petrichor is a small laboratory founded in Austin, Texas. We develop research in open source software and aeronautics for meteorologists.
 
@@ -91,3 +91,15 @@ The Hyades are a mythological sisterhood whose arrival precedes rain.
 Each aircraft in the Hyades fleet is an NDAA compliant quadcopter, with a prototype under development. The aircraft is designed to a spec defined by the average Texas cloud seeding sortie. It delivers a 1.5 kg reagent to 18,000 ft in a 40 minute mission.
 
 Petrichor develops an aircraft for $2800.
+
+# Contact
+
+## Contact
+
+Petrichor works from Austin, Texas. The lab posts its research on X.
+
+## Follow the lab
+
+Flight reports, storm days, and the state of the research.
+
+[@meteorologyxsh](https://x.com/meteorologyxsh)

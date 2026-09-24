@@ -12,6 +12,7 @@ import { App } from "@/app/App.tsx";
 import { LandingPage } from "@/app/components/LandingPage";
 import { About } from "@/app/components/About";
 import { Research } from "@/app/components/Research";
+import { Contact } from "@/app/components/Contact";
 
 const home: PageMetaT = {
   title: "Petrichor — Make it Rain",
@@ -29,6 +30,12 @@ const research: PageMetaT = {
   title: "Petrichor — Research",
   description:
     "Petrichor research involves decision science software, neural networks, and drones.",
+};
+
+const contact: PageMetaT = {
+  title: "Petrichor — Contact",
+  description:
+    "Petrichor works from Austin, Texas. The lab posts its research on X.",
 };
 
 const router = createBrowserRouter([
@@ -50,6 +57,11 @@ const router = createBrowserRouter([
         path: "/research",
         element: <Research />,
         handle: research,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+        handle: contact,
       },
     ],
   },

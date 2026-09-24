@@ -9,6 +9,7 @@ The full text of every page is in one file: [llms-full.txt](https://meteorology.
 - [Home](https://meteorology.sh/): Rain enhancement research for Texas storms, with current weather conditions over Austin.
 - [About](https://meteorology.sh/about): Who we are, what cloud seeding is about, and how it serves the natural resource interests of Texas.
 - [Research](https://meteorology.sh/research): An overview of Weatherman, a decision science platform; Automata, a reinforcement learning harness; and Hyades, the quadcopter drone platform.
+- [Contact](https://meteorology.sh/contact): How to reach the lab, and where it posts its research.
 
 ## Full text
 

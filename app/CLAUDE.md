@@ -3,8 +3,8 @@
 ## What This Is
 
 The Petrichor website, a static React SPA served from S3 and CloudFront at
-[meteorology.sh](https://meteorology.sh). It has three routes: Home (`/`), About
-(`/about`), and Research (`/research`). The home page shows live conditions over Austin,
+[meteorology.sh](https://meteorology.sh). It has four routes: Home (`/`), About
+(`/about`), Research (`/research`), and Contact (`/contact`). The home page shows live conditions over Austin,
 fetched from the Open-Meteo API and stored in Redux. That fetch is the live data
 integration pattern every future feature follows.
 
@@ -41,6 +41,7 @@ app/
         Conditions.tsx     # Live conditions card for Austin
         About.tsx          # Who / What / Why list
         Research.tsx       # Weatherman, Automata, Hyades sections
+        Contact.tsx        # Contact card with the X link
       assets/              # Images + self-hosted woff2 fonts (with OFL licences)
       index.css            # Global entry: fonts, Tailwind, tokens, theme, base layer
       fonts.css            # @font-face for Archivo and IBM Plex Mono
@@ -140,6 +141,7 @@ const router = createBrowserRouter([
       { path: "/",         element: <LandingPage />, handle: home },
       { path: "/about",    element: <About />,       handle: about },
       { path: "/research", element: <Research />,    handle: research },
+      { path: "/contact",  element: <Contact />,     handle: contact },
     ],
   },
 ]);

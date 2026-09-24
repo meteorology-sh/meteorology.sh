@@ -14,7 +14,7 @@ test("the sitemap lists every page", async ({ request }) => {
   const sitemap = await response.text();
 
   expect(response.headers()["content-type"]).toContain("xml");
-  for (const path of ["/", "/about", "/research"]) {
+  for (const path of ["/", "/about", "/research", "/contact"]) {
     expect(sitemap).toContain(`<loc>https://meteorology.sh${path}</loc>`);
   }
 });
@@ -29,7 +29,7 @@ test("llms.txt points to the full text", async ({ request }) => {
 
 // llms-full.txt is written by hand, so a heading that changes on the site
 // fails here until the file catches up.
-for (const path of ["/", "/about", "/research"]) {
+for (const path of ["/", "/about", "/research", "/contact"]) {
   test(`llms-full.txt carries every heading on ${path}`, async ({
     page,
     request,
