@@ -1,7 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: >-
-  Mail for meteorology.sh. SES receives mail for one address, stores it in S3, and a
-  Lambda forwards it to a personal inbox. Replies go out through SES SMTP.
+  Mail for meteorology.sh. SES receives mail for the lab's addresses, stores it in S3, and
+  a Lambda forwards it to a personal inbox. Replies go out through SES SMTP, through a
+  configuration set that publishes every bounce and complaint to SNS and to the inbox.
 
 Parameters:
   Domain:
@@ -12,20 +13,123 @@ Parameters:
     Default: Z0202560SZO07XGZ5YOJ
   Address:
     Type: String
-    Description: Local part of the address that receives mail.
+    Description: Local part of the address that sends mail. The SMTP login is scoped to it.
   ForwardTo:
     Type: String
     Description: Inbox that receives the forwarded mail. mail.sh passes it from infra/.env.
 
 Resources:
   # Sending identity: Easy DKIM plus a custom MAIL FROM so SPF and DKIM both align.
+  #
+  # ConfigurationSetAttributes makes the set the identity default. Gmail cannot add an
+  # X-SES-CONFIGURATION-SET header, so without this every SMTP send would bypass the set
+  # and its event publishing.
   DomainIdentity:
     Type: AWS::SES::EmailIdentity
     Properties:
       EmailIdentity: !Ref Domain
+      ConfigurationSetAttributes:
+        ConfigurationSetName: !Ref ConfigSet
       MailFromAttributes:
         MailFromDomain: !Sub mail.${Domain}
         BehaviorOnMxFailure: USE_DEFAULT_VALUE
+
+  # Everything the domain sends flows through here, so bounces and complaints have one
+  # place to arrive from and reputation metrics have one place to be read.
+  ConfigSet:
+    Type: AWS::SES::ConfigurationSet
+    Properties:
+      Name: !Sub ${AWS::StackName}-sending
+      ReputationOptions:
+        ReputationMetricsEnabled: true
+      SendingOptions:
+        SendingEnabled: true
+      SuppressionOptions:
+        SuppressedReasons: [BOUNCE, COMPLAINT]
+
+  # The problem events only. Delivery is left out on purpose: a notification for every
+  # successful send is noise, and noise is how a monitored inbox stops being read.
+  ConfigSetEvents:
+    Type: AWS::SES::ConfigurationSetEventDestination
+    Properties:
+      ConfigurationSetName: !Ref ConfigSet
+      EventDestination:
+        Name: feedback
+        Enabled: true
+        MatchingEventTypes: [bounce, complaint, reject, deliveryDelay, renderingFailure]
+        SnsDestination:
+          TopicARN: !Ref FeedbackTopic
+
+  # Bounces, complaints, and both reputation alarms land here, and the inbox is subscribed,
+  # so the process runs whether or not anyone opens the console.
+  FeedbackTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: meteorology.sh mail
+
+  FeedbackSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref FeedbackTopic
+      Protocol: email
+      Endpoint: !Ref ForwardTo
+
+  FeedbackTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics: [!Ref FeedbackTopic]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          # SNS rejects a topic policy whose statements have no Sid.
+          - Sid: SesEvents
+            Effect: Allow
+            Principal: { Service: ses.amazonaws.com }
+            Action: sns:Publish
+            Resource: !Ref FeedbackTopic
+            Condition:
+              StringEquals: { "AWS:SourceAccount": !Ref AWS::AccountId }
+          - Sid: CloudWatchAlarms
+            Effect: Allow
+            Principal: { Service: cloudwatch.amazonaws.com }
+            Action: sns:Publish
+            Resource: !Ref FeedbackTopic
+            Condition:
+              StringEquals: { "AWS:SourceAccount": !Ref AWS::AccountId }
+
+  # 5% and 0.1% are the thresholds SES itself reviews and suspends accounts at. The metrics
+  # only exist once the account has sent, so missing data is not a breach.
+  BounceRateAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub ${AWS::StackName}-bounce-rate
+      AlarmDescription: SES account bounce rate is at the level SES reviews accounts at.
+      Namespace: AWS/SES
+      MetricName: Reputation.BounceRate
+      Statistic: Maximum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 0.05
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref FeedbackTopic]
+      OKActions: [!Ref FeedbackTopic]
+
+  ComplaintRateAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub ${AWS::StackName}-complaint-rate
+      AlarmDescription: SES account complaint rate is at the level SES reviews accounts at.
+      Namespace: AWS/SES
+      MetricName: Reputation.ComplaintRate
+      Statistic: Maximum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 0.001
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref FeedbackTopic]
+      OKActions: [!Ref FeedbackTopic]
 
   # Lets the forwarder deliver while the account is in the SES sandbox.
   ForwardToIdentity:
@@ -51,10 +155,13 @@ Resources:
           Type: TXT
           TTL: "300"
           ResourceRecords: ['"v=spf1 include:amazonses.com ~all"']
+        # p=quarantine with a reporting address. A record at p=none with no rua says
+        # nobody is watching the domain, which is the opposite of what we mean.
         - Name: !Sub _dmarc.${Domain}
           Type: TXT
           TTL: "300"
-          ResourceRecords: ['"v=DMARC1; p=none;"']
+          ResourceRecords:
+            [!Sub '"v=DMARC1; p=quarantine; rua=mailto:${DmarcAddress}; fo=1;"']
         - Name: !GetAtt DomainIdentity.DkimDNSTokenName1
           Type: CNAME
           TTL: "300"
@@ -202,7 +309,13 @@ Resources:
         Enabled: true
         ScanEnabled: true
         TlsPolicy: Optional
-        Recipients: [!Sub "${Address}@${Domain}"]
+        # hello@ was added to the live rule outside the stack. Naming every address here
+        # keeps a deploy from removing it. the DMARC address exists because the DMARC record's rua
+        # points at it, and a reporting address that bounces is worse than none.
+        Recipients:
+          - !Sub "hello@${Domain}"
+          - !Sub "${Address}@${Domain}"
+          - !Sub "${DmarcAddress}"
         Actions:
           - S3Action:
               BucketName: !Ref InboxBucket
@@ -234,3 +347,7 @@ Outputs:
     Value: !Ref InboxBucket
   SmtpUser:
     Value: !Ref SmtpUser
+  ConfigSet:
+    Value: !Ref ConfigSet
+  FeedbackTopic:
+    Value: !Ref FeedbackTopic
