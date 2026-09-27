@@ -33,7 +33,7 @@ meteorology.sh/
     brand.html               #   the brand board, open from disk
     tokens.json              #   source of truth for every brand value
     build-tokens.mjs         #   generates the token CSS into app/src/app/
-  infra/                     # Mail for the lab address — SES stack + mail.sh
+  infra/                     # Mail — SES stack + mail.sh. Addresses live in infra/.env
     README.md                #   → how mail is received, forwarded, and sent
   .claude/skills/            # Project skills: voice, brand, daisyui
   docker-compose.yaml        # Local dev — bind mount + HMR

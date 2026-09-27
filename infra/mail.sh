@@ -13,8 +13,11 @@ SMTP_USER=meteorology-sh-smtp
 PARAM=/meteorology-sh/smtp
 DIR=$(cd "$(dirname "$0")" && pwd)
 
-# The inbox that receives the forwarded mail. It stays out of git: put
-# NATHAN_EMAIL=the inbox in infra/.env, or set it in the environment.
+# Addresses live in infra/.env, which git ignores:
+#   NATHAN_EMAIL      inbox that receives the forwarded mail
+#   SEND_ADDRESS      address the SMTP login may send as
+#   FORWARD_ADDRESS   From address on forwarded mail
+#   DMARC_ADDRESS     DMARC aggregate reports
 [ -f "$DIR/.env" ] && . "$DIR/.env"
 
 output() {
@@ -24,10 +27,17 @@ output() {
 
 deploy() {
   : "${NATHAN_EMAIL:?set NATHAN_EMAIL in infra/.env — the inbox that receives the mail}"
+  : "${SEND_ADDRESS:?set SEND_ADDRESS in infra/.env — the address the SMTP login may send as}"
+  : "${FORWARD_ADDRESS:?set FORWARD_ADDRESS in infra/.env — the From address on forwarded mail}"
+  : "${DMARC_ADDRESS:?set DMARC_ADDRESS in infra/.env — the DMARC aggregate report address}"
 
   aws cloudformation deploy --region "$REGION" --stack-name "$STACK" \
     --template-file "$DIR/mail.yaml" --capabilities CAPABILITY_NAMED_IAM \
-    --parameter-overrides "ForwardTo=$NATHAN_EMAIL"
+    --parameter-overrides \
+      "ForwardTo=$NATHAN_EMAIL" \
+      "SendAddress=$SEND_ADDRESS" \
+      "ForwardAddress=$FORWARD_ADDRESS" \
+      "DmarcAddress=$DMARC_ADDRESS"
 
   aws ses set-active-receipt-rule-set --region "$REGION" --rule-set-name "$(output RuleSetName)"
 

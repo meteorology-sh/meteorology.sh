@@ -11,9 +11,15 @@ Parameters:
   HostedZoneId:
     Type: AWS::Route53::HostedZone::Id
     Default: Z0202560SZO07XGZ5YOJ
-  Address:
+  SendAddress:
     Type: String
-    Description: Local part of the address that sends mail. The SMTP login is scoped to it.
+    Description: Address the SMTP login may send as. mail.sh passes it from infra/.env.
+  ForwardAddress:
+    Type: String
+    Description: From address on forwarded mail. mail.sh passes it from infra/.env.
+  DmarcAddress:
+    Type: String
+    Description: Address that receives DMARC aggregate reports. mail.sh passes it from infra/.env.
   ForwardTo:
     Type: String
     Description: Inbox that receives the forwarded mail. mail.sh passes it from infra/.env.
@@ -238,8 +244,8 @@ Resources:
           BUCKET: !Ref InboxBucket
           PREFIX: inbox/
           # Gmail treats mail from one of your own send-as addresses as mail you sent,
-          # and replies to it from your default address. Forwards come from the forward address.
-          FROM: !Sub ${ForwardAddress}
+          # and replies to it from your default address. Forwards come from ForwardAddress.
+          FROM: !Ref ForwardAddress
           SITE: !Ref Domain
           TO: !Ref ForwardTo
       Code:
@@ -310,12 +316,12 @@ Resources:
         ScanEnabled: true
         TlsPolicy: Optional
         # hello@ was added to the live rule outside the stack. Naming every address here
-        # keeps a deploy from removing it. the DMARC address exists because the DMARC record's rua
-        # points at it, and a reporting address that bounces is worse than none.
+        # keeps a deploy from removing it. DmarcAddress is on the rule because the DMARC
+        # record's rua points at it, and a reporting address that bounces is worse than none.
         Recipients:
           - !Sub "hello@${Domain}"
-          - !Sub "${Address}@${Domain}"
-          - !Sub "${DmarcAddress}"
+          - !Ref SendAddress
+          - !Ref DmarcAddress
         Actions:
           - S3Action:
               BucketName: !Ref InboxBucket
@@ -338,7 +344,7 @@ Resources:
                 Resource: "*"
                 Condition:
                   StringEquals:
-                    { "ses:FromAddress": !Sub "${Address}@${Domain}" }
+                    { "ses:FromAddress": !Ref SendAddress }
 
 Outputs:
   RuleSetName:
