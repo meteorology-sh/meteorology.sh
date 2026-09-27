@@ -50,17 +50,20 @@ app/
       theme.css            # GENERATED — Tailwind @theme + daisyUI themes — do not edit
     lib/                   # Infrastructure — not UI
       client/api.ts        # Plain async fetch functions (PascalCase names)
+      client/analytics.ts  # Google tag loader + page_view reporter, live host only
       context/
         RootProvider.tsx   # Composes all providers — edit here to add one
         RouterProvider.tsx # Router config + per-route page meta at module scope
         StoreProvider.tsx  # Instantiates store once via useMemo
         DataProvider.tsx   # Renderless: fetches conditions → dispatches to Redux
       hooks/usePageMeta.ts # Sets document title + description from the route handle
+      hooks/usePageView.ts # Reports a page_view to Google Analytics on every route
       store/
         store.ts           # makeStore() factory + inferred AppStore/RootState/AppDispatch
         hooks.ts           # useAppDispatch, useAppSelector, useAppStore (always use these)
         features/data.ts   # Redux slice: DataState, dataActions, default reducer export
       types/
+        analytics.ts       # window.dataLayer + window.gtag declarations
         data.ts            # WeatherT (API response) + ConditionsT
         page.ts            # PageMetaT (route title + description)
     tests/
@@ -86,6 +89,28 @@ docker compose -f docker-compose.prod.yaml up
 # Deploy to S3 + CloudFront — from app/
 yarn deploy
 ```
+
+## Analytics
+
+Google Analytics 4, property `G-EZ9EH6VS8H`. The tag is **not** in `index.html`. One
+build artifact serves the live site, the nginx container, and the Playwright preview
+server, so the gate is a runtime check on the hostname instead of a build flag.
+
+`lib/client/analytics.ts` owns it:
+
+- `IsMeasuredHost(hostname)` — pure predicate, true for `meteorology.sh` and
+  `www.meteorology.sh`. Everything else is a developer environment.
+- `LoadAnalytics()` — injects `gtag.js` once, on a measured host only, and configures
+  the property with `send_page_view: false`.
+- `TrackPageView(path, title)` — sends one `page_view` event.
+
+`send_page_view` is off because gtag.js loads one time in a single page app. Every
+landing, the first one included, is reported by `usePageView`, called once in `App`
+beside `usePageMeta`. It takes the title from the route handle rather than
+`document.title`, so the event does not depend on which effect ran first.
+
+Off a measured host nothing loads: no request to `googletagmanager.com`, no
+`window.dataLayer`. `e2e/analytics.test.ts` asserts that on every route.
 
 ## External API
 
@@ -439,12 +464,14 @@ Vitest excludes `src/tests/e2e/**`.
 
 ```
 src/tests/
+  analytics.test.ts        # the measured-host gate
   data.test.ts             # data slice reducer cases
   e2e/
     fixtures.ts            # test + expect, auto-stubbed Open-Meteo, isNarrow()
     layout.test.ts         # headings, titles, no sideways scroll, header vs drawer
     navigation.test.ts     # scroll to top, drawer open/close
     crawlers.test.ts       # robots.txt, sitemap.xml, llms.txt, llms-full.txt
+    analytics.test.ts      # no Google tag loads off the live host
 ```
 
 **Testing trophy (guides test investment):**
@@ -499,6 +526,8 @@ These conventions contradict standard patterns from Redux Toolkit, TypeScript, o
 - **No `createAsyncThunk`.** RTK's standard async pattern is not used. Async work lives in DataProviders calling plain client functions.
 - **No `enum` or `namespace`.** Use `type` unions instead. `erasableSyntaxOnly` enforces this at compile time.
 - **`fetch`, not axios.** Client functions use the Fetch API directly.
+- **No analytics snippet in `index.html`.** The Google tag is injected at runtime by
+  `LoadAnalytics()` so developer environments never load it.
 - **No Helmet or head manager.** Page titles and descriptions come from route `handle`s via `usePageMeta`.
 - **Typed hooks only.** Never import `useSelector` or `useDispatch` from `react-redux` — always use `useAppSelector` / `useAppDispatch`.
 

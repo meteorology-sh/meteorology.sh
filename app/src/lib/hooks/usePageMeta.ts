@@ -15,8 +15,8 @@ const isPageMeta = (handle: unknown): handle is PageMetaT =>
 
 /**
  * Sets the document title and meta description from the deepest route that
- * declares them. index.html carries the home page's values for crawlers that
- * do not run JavaScript.
+ * declares them, and returns them. index.html carries the home page's values
+ * for crawlers that do not run JavaScript.
  */
 export const usePageMeta = () => {
   const matches = useMatches();
@@ -30,4 +30,6 @@ export const usePageMeta = () => {
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", meta.description);
   }, [meta]);
+
+  return meta;
 };

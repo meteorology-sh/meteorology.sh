@@ -7,6 +7,7 @@ import { NavLink } from "react-router";
 
 // Hooks
 import { usePageMeta } from "@/lib/hooks/usePageMeta";
+import { usePageView } from "@/lib/hooks/usePageView";
 
 // Styles
 import "./App.css";
@@ -44,7 +45,8 @@ const tabClass = ({ isActive }: { isActive: boolean }) =>
 
 export const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  usePageMeta();
+  const meta = usePageMeta();
+  usePageView(meta?.title);
 
   return (
     <div className="drawer">
