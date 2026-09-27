@@ -14,7 +14,7 @@ The site is a static React SPA with four pages:
 | `/` | `LandingPage` | Wordmark, mission statement, and a live conditions card for Austin (Open-Meteo). |
 | `/about` | `About` | Who, what, and why: the engineers, cloud seeding, and Texas water resources. |
 | `/research` | `Research` | The three research products: **Weatherman** (decision science software), **Automata** (reinforcement learning harness), **Hyades** (quadcopter drones). |
-| `/contact` | `Contact` | Two cards: the lab's X account, and `hello@meteorology.sh`. |
+| `/contact` | `Contact` | Three cards: the lab's GitHub organization, `hello@meteorology.sh`, and its X account. |
 
 Weatherman is a separate product with its own identity. This site carries the Petrichor
 brand only.

@@ -98,16 +98,22 @@ Petrichor develops an aircraft for $2800.
 
 ## Contact
 
-Petrichor works from Austin, Texas. Write to the lab, or follow the research on X.
+Petrichor works from Austin, Texas. Read the source code on GitHub, write to the lab, or follow the research on X.
 
-## Follow the lab
+## Code from the lab
 
-Flight reports, storm days, and the state of the research.
+The open source software behind the research.
 
-[@meteorologyxsh](https://x.com/meteorologyxsh)
+[meteorology-sh](https://github.com/meteorology-sh)
 
 ## Write to the lab
 
 Questions about the research, and the work across Texas.
 
 [hello@meteorology.sh](mailto:hello@meteorology.sh)
+
+## Follow the lab
+
+Flight reports, storm days, and the state of the research.
+
+[@meteorologyxsh](https://x.com/meteorologyxsh)
