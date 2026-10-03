@@ -25,9 +25,12 @@ const measured = (): boolean =>
 export const LoadAnalytics = () => {
   if (!measured() || window.dataLayer) return;
 
+  // gtag.js only reads a command when it is the Arguments object itself. A
+  // rest-parameter array is a different shape, and gtag.js drops it silently.
   window.dataLayer = [];
-  window.gtag = (...args: unknown[]) => {
-    window.dataLayer?.push(args);
+  window.gtag = function () {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
   };
 
   const script = document.createElement("script");
